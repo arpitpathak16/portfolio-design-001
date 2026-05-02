@@ -151,8 +151,6 @@ export const projects: Project[] = [
   },
 ];
 
-
-
 // ─────────────────────────────────────────────────────────────────────────────
 // Motion Design items
 //   videoSrc  → local file, e.g. "/projects/motion/my-animation.mp4"
