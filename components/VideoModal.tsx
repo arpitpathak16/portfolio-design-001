@@ -84,7 +84,7 @@ export default function VideoModal({
             </div>
 
             {/* Video container — 16:9 */}
-            <div className="relative w-full rounded-xl overflow-hidden bg-[#101010]"
+            <div className="relative w-full overflow-hidden bg-[#101010]"
                  style={{ paddingBottom: "56.25%" }}>
               {embedSrc ? (
                 <iframe

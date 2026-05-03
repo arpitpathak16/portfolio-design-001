@@ -127,7 +127,7 @@ export default function CustomCursor() {
 
   return (
     /* Wrapper is display:none on touch devices (hover:none media query) */
-    <div className="hidden [@media(hover:hover)]:block" aria-hidden>
+    <div className="custom-cursor hidden [@media(hover:hover)]:block" aria-hidden>
 
       {/* ── Trailing ring ───────────────────────────────────── */}
       <motion.div

@@ -49,14 +49,14 @@ export default function FeaturedWork() {
       <div ref={headRef} className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 md:mb-14">
         <div className="overflow-hidden">
           <motion.h2
-            className="text-display text-[#F5F0E8]"
+            className="text-display text-[#080808]"
             initial={{ y: "100%" }}
             animate={inView ? { y: 0 } : {}}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             Selected
             <br />
-            <em className="font-serif not-italic text-[#9E9EFF]">Work</em>
+            <em className="font-serif not-italic text-[#FF3D00]">Work</em>
           </motion.h2>
         </div>
 
@@ -71,11 +71,11 @@ export default function FeaturedWork() {
           </p>
           <a
             href="#"
-            className="mt-4 inline-flex items-center gap-2 text-label text-[#CDFF00] hover:gap-4 transition-all duration-300"
+            className="mt-4 inline-flex items-center gap-2 text-label text-[#FF3D00] hover:gap-4 transition-all duration-300"
           >
             All projects
             <svg width="14" height="10" viewBox="0 0 14 10" fill="none">
-              <path d="M1 5h12M8 1l4 4-4 4" stroke="#CDFF00" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M1 5h12M8 1l4 4-4 4" stroke="#FF3D00" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </a>
         </motion.div>

@@ -4,16 +4,15 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
-  { label: "Work",    href: "#work" },
-  { label: "About",   href: "#about" },
+  { label: "Work",     href: "#work" },
+  { label: "About",    href: "#about" },
   { label: "Services", href: "#services" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact",  href: "#contact" },
 ];
 
 export default function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -29,11 +28,11 @@ export default function Navigation() {
         style={{
           WebkitBackdropFilter: "blur(16px)",
           backdropFilter: "blur(16px)",
-          background: "linear-gradient(to bottom, rgba(8,8,8,0.75) 0%, rgba(8,8,8,0.45) 60%, transparent 100%)",
+          background: "linear-gradient(to bottom, rgba(245,240,232,0.90) 0%, rgba(245,240,232,0.55) 60%, transparent 100%)",
         }}
       >
         {/* Logo */}
-        <a href="#" className="text-label text-[#F5F0E8] tracking-[0.18em] hover:text-[#CDFF00] transition-colors duration-300">
+        <a href="#" className="text-label text-[#080808] tracking-[0.18em] hover:text-[#FF3D00] transition-colors duration-300">
           APOORVA
         </a>
 
@@ -43,7 +42,7 @@ export default function Navigation() {
             <a
               key={link.label}
               href={link.href}
-              className="text-label text-[#666666] hover:text-[#F5F0E8] transition-colors duration-300 link-underline"
+              className="text-label text-[#888888] hover:text-[#080808] transition-colors duration-300 link-underline"
             >
               {link.label}
             </a>
@@ -53,9 +52,10 @@ export default function Navigation() {
         {/* Availability pill */}
         <a
           href="#contact"
-          className="hidden md:flex items-center gap-2 text-label text-[#080808] bg-[#CDFF00] px-4 py-2 rounded-full hover:bg-[#F5F0E8] transition-colors duration-300"
+          className="hidden md:flex items-center gap-2 text-label text-[#080808] bg-[#080808] px-4 py-2 rounded-full hover:bg-[#FF3D00] transition-colors duration-300"
+          style={{ color: "#F5F0E8" }}
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-[#080808] animate-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#CDFF00] animate-pulse" />
           Available
         </a>
 
@@ -65,21 +65,9 @@ export default function Navigation() {
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
-          <motion.span
-            animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-            className="block w-6 h-px bg-[#F5F0E8]"
-            transition={{ duration: 0.3 }}
-          />
-          <motion.span
-            animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
-            className="block w-6 h-px bg-[#F5F0E8]"
-            transition={{ duration: 0.3 }}
-          />
-          <motion.span
-            animate={menuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-            className="block w-6 h-px bg-[#F5F0E8]"
-            transition={{ duration: 0.3 }}
-          />
+          <motion.span animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }} className="block w-6 h-px bg-[#080808]" transition={{ duration: 0.3 }} />
+          <motion.span animate={menuOpen ? { opacity: 0 } : { opacity: 1 }} className="block w-6 h-px bg-[#080808]" transition={{ duration: 0.3 }} />
+          <motion.span animate={menuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }} className="block w-6 h-px bg-[#080808]" transition={{ duration: 0.3 }} />
         </button>
       </motion.header>
 
@@ -91,7 +79,7 @@ export default function Navigation() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: "-100%" }}
             transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 z-[999] bg-[#080808] flex flex-col justify-center px-8"
+            className="fixed inset-0 z-[999] bg-[#F5F0E8] flex flex-col justify-center px-8"
           >
             <nav className="flex flex-col gap-6">
               {navLinks.map((link, i) => (
@@ -101,7 +89,7 @@ export default function Navigation() {
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1 + i * 0.08, ease: [0.16, 1, 0.3, 1], duration: 0.5 }}
-                  className="text-display text-[#F5F0E8] hover:text-[#CDFF00] transition-colors duration-300"
+                  className="text-display text-[#080808] hover:text-[#FF3D00] transition-colors duration-300"
                   onClick={() => setMenuOpen(false)}
                 >
                   {link.label}
@@ -114,9 +102,9 @@ export default function Navigation() {
               transition={{ delay: 0.5 }}
               className="absolute bottom-10 left-8 right-8 flex justify-between items-end"
             >
-              <p className="text-label text-[#666666]">© 2025 Apoorva Anand</p>
-              <a href="mailto:hello@apoorvaanand.com" className="text-label text-[#666666] hover:text-[#CDFF00] transition-colors">
-                hello@apoorvaanand.com
+              <p className="text-label text-[#888888]">© 2025 Apoorva Anand</p>
+              <a href="mailto:apoorv.anand1610@gmail.com" className="text-label text-[#888888] hover:text-[#FF3D00] transition-colors">
+                apoorv.anand1610@gmail.com
               </a>
             </motion.div>
           </motion.div>

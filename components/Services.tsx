@@ -9,13 +9,13 @@ export default function Services() {
   const inView = useInView(ref, { once: true, margin: "-10%" });
 
   return (
-    <section id="services" className="px-6 md:px-10 py-20 md:py-28 border-t border-[#1E1E1E]">
+    <section id="services" className="px-6 md:px-10 py-20 md:py-28 border-t border-[#D8D3CA]">
       <div ref={ref}>
 
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-10 mb-16">
           <div className="overflow-hidden">
             <motion.h2
-              className="text-display text-[#F5F0E8]"
+              className="text-display text-[#080808]"
               initial={{ y: "100%" }}
               animate={inView ? { y: 0 } : {}}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -27,7 +27,7 @@ export default function Services() {
           </div>
 
           <motion.p
-            className="text-subhead text-[#666666] max-w-sm leading-relaxed"
+            className="text-subhead text-[#888888] max-w-sm leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.3, duration: 0.6 }}
@@ -38,7 +38,7 @@ export default function Services() {
         </div>
 
         {/* Service list */}
-        <div className="divide-y divide-[#1E1E1E]">
+        <div className="divide-y divide-[#D8D3CA]">
           {services.map((service, i) => (
             <motion.div
               key={service.num}
@@ -48,15 +48,15 @@ export default function Services() {
               className="group flex flex-col md:flex-row md:items-center justify-between gap-4 py-7 md:py-8 hover:pl-4 transition-all duration-300"
             >
               <div className="flex items-start gap-6 md:gap-10">
-                <span className="text-label text-[#333333] shrink-0 mt-1">{service.num}</span>
+                <span className="text-label text-[#BBBBBB] shrink-0 mt-1">{service.num}</span>
                 <div>
-                  <h3 className="text-heading text-[#F5F0E8] group-hover:text-[#CDFF00] transition-colors duration-300">
+                  <h3 className="text-heading text-[#080808] group-hover:text-[#FF3D00] transition-colors duration-300">
                     {service.title}
                   </h3>
                   {"tags" in service && (
                     <div className="flex flex-wrap gap-2 mt-3">
                       {(service as typeof service & { tags: string[] }).tags.map((tag) => (
-                        <span key={tag} className="text-[10px] tracking-wider uppercase text-[#444] border border-[#1E1E1E] px-2 py-0.5 rounded-full group-hover:border-[#333] transition-colors duration-300">
+                        <span key={tag} className="text-[10px] tracking-wider uppercase text-[#888888] border border-[#D8D3CA] px-2 py-0.5 rounded-full group-hover:border-[#BBBBBB] transition-colors duration-300">
                           {tag}
                         </span>
                       ))}
@@ -64,7 +64,7 @@ export default function Services() {
                   )}
                 </div>
               </div>
-              <p className="text-sm text-[#555555] leading-relaxed md:max-w-xs group-hover:text-[#888888] transition-colors duration-300 md:text-right shrink-0">
+              <p className="text-sm text-[#888888] leading-relaxed md:max-w-xs group-hover:text-[#555555] transition-colors duration-300 md:text-right shrink-0">
                 {service.desc}
               </p>
             </motion.div>
@@ -73,18 +73,18 @@ export default function Services() {
 
         {/* Process note */}
         <motion.div
-          className="mt-16 p-6 md:p-8 rounded-2xl border border-[#1E1E1E] bg-[#101010] flex flex-col md:flex-row items-start md:items-center gap-6 justify-between"
+          className="mt-16 p-6 md:p-8 border border-[#D8D3CA] bg-[#EEEAE3] flex flex-col md:flex-row items-start md:items-center gap-6 justify-between"
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.7, duration: 0.6 }}
         >
           <div>
-            <p className="text-label text-[#CDFF00] mb-2">Our Process</p>
-            <p className="text-subhead text-[#F5F0E8]">Discovery → Strategy → Concept → Craft → Ship</p>
+            <p className="text-label text-[#FF3D00] mb-2">Our Process</p>
+            <p className="text-subhead text-[#080808]">Discovery → Strategy → Concept → Craft → Ship</p>
           </div>
           <a
             href="#contact"
-            className="shrink-0 text-label text-[#080808] bg-[#F5F0E8] px-6 py-3 rounded-full hover:bg-[#CDFF00] transition-colors duration-300"
+            className="shrink-0 text-label text-[#F5F0E8] bg-[#080808] px-6 py-3 rounded-full hover:bg-[#FF3D00] transition-colors duration-300"
           >
             Start a Project
           </a>

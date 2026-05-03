@@ -167,56 +167,16 @@ export interface MotionItem {
   videoSrc?: string;
   gifSrc?: string;
   youtubeId?: string;
+  loopVideo?: boolean;  // YouTube only: true = autoplay muted loop in card, false = thumbnail + click to play (default)
   gradient: string;
 }
 
 export const motionItems: MotionItem[] = [
-  // ── Replace gradient fallbacks with real media when ready ─────────────────
-  // To use a local video: add  videoSrc: "/projects/motion/my-file.mp4"
-  // To use a YouTube video: add  youtubeId: "VIDEO_ID"
-  // To use a GIF: add  gifSrc: "/projects/motion/my-loop.gif"
-  // ─────────────────────────────────────────────────────────────────────────
-  {
-    id: 1,
-    title: "Title Sequence",
-    client: "Client Name",
-    year: "2025",
-    aspect: "landscape",
-    gradient: "from-slate-900 via-zinc-900 to-neutral-950",
-    // videoSrc: "/projects/motion/title-seq.mp4",
-    // youtubeId: "VIDEO_ID",
-  },
-  {
-    id: 2,
-    title: "Logo Animation",
-    client: "Client Name",
-    year: "2025",
-    aspect: "square",
-    gradient: "from-violet-950 via-indigo-900 to-slate-950",
-    // gifSrc: "/projects/motion/logo-anim.gif",
-  },
-  {
-    id: 3,
-    title: "Motion Reel",
-    client: "Client Name",
-    year: "2024",
-    aspect: "square",
-    gradient: "from-orange-950 via-red-950 to-stone-950",
-    // youtubeId: "VIDEO_ID",
-  },
-  {
-    id: 4,
-    title: "Brand Animation",
-    client: "Client Name",
-    year: "2024",
-    aspect: "landscape",
-    gradient: "from-teal-950 via-cyan-900 to-slate-950",
-    // videoSrc: "/projects/motion/brand-anim.mp4",
-  },
-  //
-  // YouTube (thumbnail + click-to-play):
-  // { id: 3, title: "Motion Reel", client: "Self", year: "2025", aspect: "landscape",
-  //   youtubeId: "VIDEO_ID", gradient: "from-stone-900 to-neutral-950" },
+  { id: 1, title: "Motion Piece 1", aspect: "landscape", youtubeId: "k58PcKYfQMg", loopVideo: true, gradient: "from-slate-900 via-zinc-900 to-neutral-950" },
+  { id: 2, title: "Motion Piece 2", aspect: "landscape", youtubeId: "D3cvdL24wy4", loopVideo: true, gradient: "from-violet-950 via-indigo-900 to-slate-950" },
+  { id: 3, title: "Motion Piece 3", aspect: "landscape", youtubeId: "FyT9WRZDLTM", loopVideo: true, gradient: "from-orange-950 via-red-950 to-stone-950" },
+  { id: 4, title: "Motion Piece 4", aspect: "landscape", youtubeId: "thBymxP71pE", loopVideo: true, gradient: "from-teal-950 via-cyan-900 to-slate-950" },
+  { id: 5, title: "Motion Piece 5", aspect: "landscape", youtubeId: "MeyJKgAea_s", loopVideo: true, gradient: "from-emerald-950 via-green-900 to-slate-950" },
 ];
 
 export const clients = [

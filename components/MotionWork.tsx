@@ -7,37 +7,61 @@ import type { MotionItem } from "@/lib/data";
 import VideoModal from "./VideoModal";
 
 function MotionCard({ item, index }: { item: MotionItem; index: number }) {
-  const ref      = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const inView   = useInView(ref, { once: true, margin: "-10%" });
+  const ref       = useRef<HTMLDivElement>(null);
+  const videoRef  = useRef<HTMLVideoElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const inView    = useInView(ref, { once: true, margin: "-10%" });
   const [modalOpen, setModalOpen] = useState(false);
 
-  const isClickable  = !!(item.youtubeId || item.videoSrc);
-  const aspectClass  = item.aspect === "portrait"  ? "aspect-[9/16]"
-                     : item.aspect === "square"    ? "aspect-square"
-                     : "aspect-video";
+  const youtubeLoop = !!(item.youtubeId && item.loopVideo);
+  const isClickable = !!(item.youtubeId || item.videoSrc);
+  const aspectClass = item.aspect === "portrait" ? "aspect-[9/16]"
+                    : item.aspect === "square"   ? "aspect-square"
+                    : "aspect-video";
 
   const thumbnail = item.youtubeId
     ? `https://img.youtube.com/vi/${item.youtubeId}/maxresdefault.jpg`
     : null;
 
-  // Autoplay local video / GIF on scroll
+  // Autoplay local video on scroll
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !item.videoSrc) return;
     const observer = new IntersectionObserver(
       ([entry]) => { entry.isIntersecting ? video.play().catch(() => {}) : video.pause(); },
       { threshold: 0.25 }
     );
     observer.observe(video);
     return () => observer.disconnect();
-  }, []);
+  }, [item.videoSrc]);
 
+  // Play/pause YouTube loop iframe on scroll
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (modalOpen) video.pause(); else video.play().catch(() => {});
-  }, [modalOpen]);
+    const iframe = iframeRef.current;
+    if (!iframe || !youtubeLoop) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const func = entry.isIntersecting ? "playVideo" : "pauseVideo";
+        iframe.contentWindow?.postMessage(JSON.stringify({ event: "command", func, args: "" }), "*");
+      },
+      { threshold: 0.25 }
+    );
+    observer.observe(iframe);
+    return () => observer.disconnect();
+  }, [youtubeLoop]);
+
+  // Pause background media while modal is open
+  useEffect(() => {
+    const video  = videoRef.current;
+    const iframe = iframeRef.current;
+    if (modalOpen) {
+      video?.pause();
+      iframe?.contentWindow?.postMessage(JSON.stringify({ event: "command", func: "pauseVideo", args: "" }), "*");
+    } else {
+      video?.play().catch(() => {});
+      if (youtubeLoop) iframe?.contentWindow?.postMessage(JSON.stringify({ event: "command", func: "playVideo", args: "" }), "*");
+    }
+  }, [modalOpen, youtubeLoop]);
 
   return (
     <>
@@ -48,20 +72,31 @@ function MotionCard({ item, index }: { item: MotionItem; index: number }) {
         transition={{ duration: 0.7, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
         onClick={() => isClickable && setModalOpen(true)}
         data-cursor-label={isClickable ? "play" : undefined}
-        className={`relative ${aspectClass} rounded-2xl overflow-hidden group cursor-none`}
+        className={`relative ${aspectClass} overflow-hidden group cursor-none`}
       >
-        {/* Media */}
+        {/* Media — priority: YouTube (loop) > YouTube (thumbnail) > local video > GIF > gradient */}
         <div className="absolute inset-0">
-          {item.videoSrc ? (
-            <video
-              ref={videoRef}
-              src={item.videoSrc}
-              muted loop playsInline preload="metadata"
-              className="w-full h-full object-cover"
-            />
-          ) : item.gifSrc ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={item.gifSrc} alt={item.title} className="w-full h-full object-cover" />
+          {youtubeLoop ? (
+            <>
+              <iframe
+                ref={iframeRef}
+                src={`https://www.youtube.com/embed/${item.youtubeId}?autoplay=1&mute=1&loop=1&playlist=${item.youtubeId}&controls=0&playsinline=1&enablejsapi=1&rel=0&modestbranding=1`}
+                allow="autoplay; encrypted-media"
+                className="absolute inset-0 w-full h-full pointer-events-none"
+                style={{ border: 0 }}
+              />
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="w-14 h-14 rounded-full bg-[#080808]/60 border border-[#F5F0E8]/20
+                                flex items-center justify-center
+                                group-hover:bg-[#CDFF00] group-hover:border-[#CDFF00]
+                                transition-all duration-300 scale-90 group-hover:scale-100">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M5 3l9 5-9 5V3z" fill="#F5F0E8"
+                          className="group-hover:fill-[#080808] transition-colors duration-300" />
+                  </svg>
+                </div>
+              </div>
+            </>
           ) : item.youtubeId ? (
             <>
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -86,6 +121,16 @@ function MotionCard({ item, index }: { item: MotionItem; index: number }) {
                 </div>
               </div>
             </>
+          ) : item.videoSrc ? (
+            <video
+              ref={videoRef}
+              src={item.videoSrc}
+              muted loop playsInline preload="metadata"
+              className="w-full h-full object-cover"
+            />
+          ) : item.gifSrc ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={item.gifSrc} alt={item.title} className="w-full h-full object-cover" />
           ) : (
             <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient}`} />
           )}
@@ -99,8 +144,8 @@ function MotionCard({ item, index }: { item: MotionItem; index: number }) {
           <p className="text-label text-[#888888] mb-1">
             {item.client}{item.client && item.year ? " — " : ""}{item.year}
           </p>
-          <h3 className="font-display text-[#F5F0E8] text-lg md:text-xl font-semibold leading-tight
-                         group-hover:text-[#CDFF00] transition-colors duration-300">
+          <h3 className="font-display text-[#080808] text-lg md:text-xl font-semibold leading-tight
+                         group-hover:text-[#FF3D00] transition-colors duration-300">
             {item.title}
           </h3>
         </div>
@@ -130,12 +175,12 @@ export default function MotionWork() {
   let cardIndex = 0;
 
   return (
-    <section className="px-6 md:px-10 py-20 md:py-28 border-t border-[#1E1E1E]">
+    <section className="px-6 md:px-10 py-20 md:py-28 border-t border-[#D8D3CA]">
       {/* Header */}
       <div ref={headRef} className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 md:mb-14">
         <div className="overflow-hidden">
           <motion.h2
-            className="text-display text-[#F5F0E8]"
+            className="text-display text-[#080808]"
             initial={{ y: "100%" }}
             animate={inView ? { y: 0 } : {}}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}

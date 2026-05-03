@@ -15,7 +15,7 @@ export default function About() {
   const words = statement.split(" ");
 
   return (
-    <section id="about" className="bg-[#F4F1EC] text-[#080808] px-6 md:px-10 py-20 md:py-28">
+    <section id="about" className="bg-[#EEEAE3] text-[#080808] px-6 md:px-10 py-20 md:py-28">
       <div ref={ref}>
 
         {/* Eyebrow */}
@@ -92,7 +92,7 @@ export default function About() {
           </div>
 
           {/* Studio portrait — right */}
-          <div className="relative w-full aspect-[2/4] max-h-[780px] rounded-2xl overflow-hidden">
+          <div className="relative w-full aspect-[2/4] max-h-[780px] overflow-hidden">
             <Image
               src="/projects/portrait/apoorva-profile.jpg"
               alt="Apoorva Anand — Studio Portrait"

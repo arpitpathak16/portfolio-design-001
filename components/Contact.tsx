@@ -21,7 +21,7 @@ export default function Contact() {
   const letters = "APOORVA".split("");
 
   return (
-    <section id="contact" className="px-6 md:px-10 py-24 md:py-32 border-t border-[#1E1E1E] overflow-hidden">
+    <section id="contact" className="px-6 md:px-10 py-24 md:py-32 border-t border-[#D8D3CA] overflow-hidden">
       <div ref={ref}>
 
         {/* Eyebrow */}
@@ -37,7 +37,7 @@ export default function Contact() {
         {/* Big CTA headline */}
         <div className="overflow-hidden mb-12 md:mb-16">
           <motion.h2
-            className="text-display text-[#F5F0E8] max-w-4xl"
+            className="text-display text-[#080808] max-w-4xl"
             initial={{ y: "100%" }}
             animate={inView ? { y: 0 } : {}}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
@@ -60,16 +60,16 @@ export default function Contact() {
             onMouseLeave={() => setHoveredEmail(false)}
             className="group inline-flex items-center gap-5"
           >
-            <span className={`text-heading transition-colors duration-500 ${hoveredEmail ? "text-[#FF3D00]" : "text-[#F5F0E8]"}`}>
+            <span className={`text-heading transition-colors duration-500 ${hoveredEmail ? "text-[#FF3D00]" : "text-[#080808]"}`}>
               {email}
             </span>
             <motion.span
               animate={hoveredEmail ? { x: 6, y: -6 } : { x: 0, y: 0 }}
               transition={{ duration: 0.3 }}
-              className="w-10 h-10 md:w-14 md:h-14 rounded-full border border-[#333] flex items-center justify-center group-hover:bg-[#FF3D00] group-hover:border-[#FF3D00] transition-colors duration-300"
+              className="w-10 h-10 md:w-14 md:h-14 rounded-full border border-[#D8D3CA] flex items-center justify-center group-hover:bg-[#FF3D00] group-hover:border-[#FF3D00] transition-colors duration-300"
             >
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M2 12L12 2M12 2H4M12 2v8" stroke="#F5F0E8" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="text-[#080808] group-hover:text-[#F5F0E8] transition-colors duration-300">
+                <path d="M2 12L12 2M12 2H4M12 2v8" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </motion.span>
           </motion.a>
@@ -84,16 +84,16 @@ export default function Contact() {
             onMouseLeave={() => setHoveredPhone(false)}
             className="group inline-flex items-center gap-5"
           >
-            <span className={`text-heading transition-colors duration-500 ${hoveredPhone ? "text-[#CDFF00]" : "text-[#F5F0E8]"}`}>
+            <span className={`text-heading transition-colors duration-500 ${hoveredPhone ? "text-[#FF3D00]" : "text-[#080808]"}`}>
               {phone}
             </span>
             <motion.span
               animate={hoveredPhone ? { x: 6, y: -6 } : { x: 0, y: 0 }}
               transition={{ duration: 0.3 }}
-              className="w-10 h-10 md:w-14 md:h-14 rounded-full border border-[#333] flex items-center justify-center group-hover:bg-[#CDFF00] group-hover:border-[#CDFF00] transition-colors duration-300"
+              className="w-10 h-10 md:w-14 md:h-14 rounded-full border border-[#D8D3CA] flex items-center justify-center group-hover:bg-[#FF3D00] group-hover:border-[#FF3D00] transition-colors duration-300"
             >
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M2 12L12 2M12 2H4M12 2v8" stroke="#F5F0E8" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="text-[#080808] group-hover:text-[#F5F0E8] transition-colors duration-300">
+                <path d="M2 12L12 2M12 2H4M12 2v8" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </motion.span>
           </motion.a>
@@ -101,7 +101,7 @@ export default function Contact() {
 
         {/* Bottom row: social + logo stamp */}
         <motion.div
-          className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 border-t border-[#1E1E1E] pt-10"
+          className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 border-t border-[#D8D3CA] pt-10"
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.6, duration: 0.6 }}
@@ -111,7 +111,7 @@ export default function Contact() {
               <a
                 key={s.label}
                 href={s.href}
-                className="text-label text-[#555555] hover:text-[#F5F0E8] transition-colors duration-300 link-underline"
+                className="text-label text-[#555555] hover:text-[#080808] transition-colors duration-300 link-underline"
               >
                 {s.label}
               </a>
@@ -124,15 +124,15 @@ export default function Contact() {
               {letters.map((l, i) => (
                 <motion.span
                   key={i}
-                  className="text-label text-[#222222] hover:text-[#CDFF00] transition-colors duration-200 cursor-default"
-                  whileHover={{ y: -3, color: "#CDFF00" }}
+                  className="text-label text-[#BBBBBB] hover:text-[#FF3D00] transition-colors duration-200 cursor-default"
+                  whileHover={{ y: -3, color: "#FF3D00" }}
                   transition={{ type: "spring", stiffness: 400, damping: 15 }}
                 >
                   {l}
                 </motion.span>
               ))}
             </div>
-            <span className="text-label text-[#333333]">© 2025</span>
+            <span className="text-label text-[#888888]">© 2025</span>
           </div>
         </motion.div>
 
