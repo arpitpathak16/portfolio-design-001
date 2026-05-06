@@ -60,7 +60,7 @@ export default function About() {
 
         {/* Portrait / bio row */}
         <motion.div
-          className="mt-16 md:mt-20 grid grid-cols-1 md:grid-cols-2 gap-10 items-center"
+          className="mt-16 md:mt-20 grid grid-cols-1 md:grid-cols-[1.08fr_0.72fr] gap-14 md:gap-20 lg:gap-28 items-center"
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.8, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
@@ -92,13 +92,13 @@ export default function About() {
           </div>
 
           {/* Studio portrait — right */}
-          <div className="relative w-full aspect-[2/4] max-h-[780px] overflow-hidden">
+          <div className="relative w-full max-w-[420px] justify-self-center md:justify-self-end aspect-[3/4] overflow-hidden">
             <Image
               src="/projects/portrait/apoorva-profile.jpg"
               alt="Apoorva Anand — Studio Portrait"
               fill
               className="object-cover object-center"
-              sizes="(max-width: 768px) 100vw, 50vw"
+              sizes="(max-width: 768px) 92vw, 34vw"
               priority
             />
           </div>

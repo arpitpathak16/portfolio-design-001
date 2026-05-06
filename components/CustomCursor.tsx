@@ -6,9 +6,9 @@ import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motio
 /* ─────────────────────────────────────────────────────────────────
    Pixel-art arrow cursor
    Each cell in GRID is 3×3 CSS px (PIXEL_SIZE).
-   Values: 0 = transparent | 1 = body (lime / orange on click) | 2 = outline (near-black)
+   Values: 0 = transparent | 1 = body (white / gray on click) | 2 = outline (near-black)
 
-   Visualised (* = outline, L = lime body, . = empty):
+   Visualised (* = outline, W = white body, . = empty):
      Row  0:  * . . . . . . . .   ← tip / hotspot
      Row  1:  * * . . . . . . .
      Row  2:  * L * . . . . . .
@@ -49,8 +49,8 @@ const GRID: number[][] = [
 const CURSOR_W = 9 * PIXEL_SIZE; // 27px
 const CURSOR_H = GRID.length * PIXEL_SIZE; // 51px
 const OUTLINE_COLOR = "#0A0A0A";
-const BODY_LIME   = "#CDFF00";
-const BODY_CLICK  = "#FF3D00"; // flashes orange on mousedown
+const BODY_LIME   = "#FFFFFF";
+const BODY_CLICK  = "#5b5b5b"; // flashes gray on mousedown
 
 /* ── Ring config per cursor state ── */
 interface RingCfg { label: string; size: number }
@@ -146,8 +146,8 @@ export default function CustomCursor() {
         <motion.div
           className="absolute inset-0 rounded-full border"
           animate={{
-            borderColor:     isExpanded ? "rgba(205,255,0,0.6)" : "rgba(205,255,0,0.3)",
-            backgroundColor: isExpanded ? "rgba(205,255,0,0.07)" : "transparent",
+            borderColor:     isExpanded ? "rgba(215,215,215,0.6)" : "rgba(215,215,215,0.3)",
+            backgroundColor: isExpanded ? "rgba(215,215,215,0.08)" : "transparent",
             scale: clicking ? 0.82 : 1,
           }}
           transition={{ duration: 0.2 }}
@@ -161,7 +161,7 @@ export default function CustomCursor() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{   opacity: 0, scale: 0.5 }}
               transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-              className="relative z-10 select-none text-[8px] tracking-[0.22em] uppercase font-semibold text-[#CDFF00]"
+              className="relative z-10 select-none text-[8px] tracking-[0.22em] uppercase font-semibold text-[#D7D7D7]"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
               {cfg.label}

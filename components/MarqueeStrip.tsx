@@ -24,7 +24,7 @@ export default function MarqueeStrip({ variant = "dark" }: MarqueeStripProps) {
             <span className={`text-label px-8 ${isDark ? "text-[#555555]" : "text-[#AAAAAA]"}`}>
               {client}
             </span>
-            <span className={`w-1 h-1 rounded-full ${isDark ? "bg-[#FF3D00]" : "bg-[#CCCCCC]"}`} />
+            <span className={`w-1 h-1 rounded-full ${isDark ? "bg-[#4A4A4A]" : "bg-[#CCCCCC]"}`} />
           </span>
         ))}
       </div>

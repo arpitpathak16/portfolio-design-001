@@ -5,8 +5,6 @@ import { motion, useInView } from "framer-motion";
 
 const socials = [
   { label: "Instagram", href: "#" },
-  { label: "Behance",   href: "#" },
-  { label: "Vimeo",     href: "#" },
   { label: "LinkedIn",  href: "#" },
 ];
 
@@ -60,13 +58,13 @@ export default function Contact() {
             onMouseLeave={() => setHoveredEmail(false)}
             className="group inline-flex items-center gap-5"
           >
-            <span className={`text-heading transition-colors duration-500 ${hoveredEmail ? "text-[#FF3D00]" : "text-[#080808]"}`}>
+            <span className={`text-heading transition-colors duration-500 ${hoveredEmail ? "text-[#4A4A4A]" : "text-[#080808]"}`}>
               {email}
             </span>
             <motion.span
               animate={hoveredEmail ? { x: 6, y: -6 } : { x: 0, y: 0 }}
               transition={{ duration: 0.3 }}
-              className="w-10 h-10 md:w-14 md:h-14 rounded-full border border-[#D8D3CA] flex items-center justify-center group-hover:bg-[#FF3D00] group-hover:border-[#FF3D00] transition-colors duration-300"
+              className="w-10 h-10 md:w-14 md:h-14 rounded-full border border-[#D8D3CA] flex items-center justify-center group-hover:bg-[#4A4A4A] group-hover:border-[#4A4A4A] transition-colors duration-300"
             >
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="text-[#080808] group-hover:text-[#F5F0E8] transition-colors duration-300">
                 <path d="M2 12L12 2M12 2H4M12 2v8" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
@@ -84,13 +82,13 @@ export default function Contact() {
             onMouseLeave={() => setHoveredPhone(false)}
             className="group inline-flex items-center gap-5"
           >
-            <span className={`text-heading transition-colors duration-500 ${hoveredPhone ? "text-[#FF3D00]" : "text-[#080808]"}`}>
+            <span className={`text-heading transition-colors duration-500 ${hoveredPhone ? "text-[#4A4A4A]" : "text-[#080808]"}`}>
               {phone}
             </span>
             <motion.span
               animate={hoveredPhone ? { x: 6, y: -6 } : { x: 0, y: 0 }}
               transition={{ duration: 0.3 }}
-              className="w-10 h-10 md:w-14 md:h-14 rounded-full border border-[#D8D3CA] flex items-center justify-center group-hover:bg-[#FF3D00] group-hover:border-[#FF3D00] transition-colors duration-300"
+              className="w-10 h-10 md:w-14 md:h-14 rounded-full border border-[#D8D3CA] flex items-center justify-center group-hover:bg-[#4A4A4A] group-hover:border-[#4A4A4A] transition-colors duration-300"
             >
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="text-[#080808] group-hover:text-[#F5F0E8] transition-colors duration-300">
                 <path d="M2 12L12 2M12 2H4M12 2v8" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
@@ -124,15 +122,15 @@ export default function Contact() {
               {letters.map((l, i) => (
                 <motion.span
                   key={i}
-                  className="text-label text-[#BBBBBB] hover:text-[#FF3D00] transition-colors duration-200 cursor-default"
-                  whileHover={{ y: -3, color: "#FF3D00" }}
+                  className="text-label text-[#BBBBBB] hover:text-[#4A4A4A] transition-colors duration-200 cursor-default"
+                  whileHover={{ y: -3, color: "#4A4A4A" }}
                   transition={{ type: "spring", stiffness: 400, damping: 15 }}
                 >
                   {l}
                 </motion.span>
               ))}
             </div>
-            <span className="text-label text-[#888888]">© 2025</span>
+            <span className="text-label text-[#888888]">© 2026</span>
           </div>
         </motion.div>
 

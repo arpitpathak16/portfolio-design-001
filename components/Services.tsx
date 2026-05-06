@@ -22,7 +22,7 @@ export default function Services() {
             >
               What I
               <br />
-              <em className="font-serif not-italic text-[#FF3D00]">Create</em>
+              <em className="font-serif not-italic text-[#4A4A4A]">Create</em>
             </motion.h2>
           </div>
 
@@ -50,7 +50,7 @@ export default function Services() {
               <div className="flex items-start gap-6 md:gap-10">
                 <span className="text-label text-[#BBBBBB] shrink-0 mt-1">{service.num}</span>
                 <div>
-                  <h3 className="text-heading text-[#080808] group-hover:text-[#FF3D00] transition-colors duration-300">
+                  <h3 className="text-heading text-[#080808] group-hover:text-[#4A4A4A] transition-colors duration-300">
                     {service.title}
                   </h3>
                   {"tags" in service && (
@@ -79,12 +79,12 @@ export default function Services() {
           transition={{ delay: 0.7, duration: 0.6 }}
         >
           <div>
-            <p className="text-label text-[#FF3D00] mb-2">Our Process</p>
+            <p className="text-label text-[#4A4A4A] mb-2">My Process</p>
             <p className="text-subhead text-[#080808]">Discovery → Strategy → Concept → Craft → Ship</p>
           </div>
           <a
             href="#contact"
-            className="shrink-0 text-label text-[#F5F0E8] bg-[#080808] px-6 py-3 rounded-full hover:bg-[#FF3D00] transition-colors duration-300"
+            className="shrink-0 text-label text-[#F5F0E8] bg-[#080808] px-6 py-3 rounded-full hover:bg-[#4A4A4A] transition-colors duration-300"
           >
             Start a Project
           </a>

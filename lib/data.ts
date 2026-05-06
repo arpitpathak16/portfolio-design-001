@@ -11,6 +11,7 @@ export interface Project {
   size: CardSize;
   gradient: string;        // fallback gradient when no real media
   accentColor: string;
+  description?: string;
   // ── Media (pick one, or none for gradient fallback) ──────────────
   videoSrc?: string;       // local file: "/projects/my-reel.mp4"
   imageSrc?: string;       // local file: "/projects/thumb.jpg" — also used as video poster
@@ -42,6 +43,76 @@ export const projects: Project[] = [
   // ── LANDSCAPE projects ────────────────────────────────────────────────────
   // Slot: hero (large, 2/3 width) and banner (full-width) — in that order
   {
+    id: 10,
+    title: "Priority Film 01",
+    client: "Selected Work",
+    category: "Brand Film",
+    year: "2025",
+    aspect: "landscape",
+    size: "wide",
+    gradient: "from-zinc-950 via-stone-900 to-neutral-950",
+    accentColor: "#D7D7D7",
+    description: "A selected 16:9 film piece added to the priority YouTube work set.",
+    youtubeId: "xWlZkZnQVwQ",
+    tags: ["Film", "Edit", "YouTube"],
+  },
+  {
+    id: 11,
+    title: "Priority Film 02",
+    client: "Selected Work",
+    category: "Brand Film",
+    year: "2025",
+    aspect: "landscape",
+    size: "wide",
+    gradient: "from-slate-950 via-zinc-900 to-stone-950",
+    accentColor: "#D7D7D7",
+    description: "A selected 16:9 film piece added to the priority YouTube work set.",
+    youtubeId: "bkIVe0NLKS8",
+    tags: ["Film", "Edit", "YouTube"],
+  },
+  {
+    id: 12,
+    title: "Priority Film 03",
+    client: "Selected Work",
+    category: "Brand Film",
+    year: "2025",
+    aspect: "landscape",
+    size: "wide",
+    gradient: "from-neutral-950 via-emerald-950 to-zinc-950",
+    accentColor: "#D7D7D7",
+    description: "A selected 16:9 film piece added to the priority YouTube work set.",
+    youtubeId: "tUBHBtsUSBA",
+    tags: ["Film", "Edit", "YouTube"],
+  },
+  {
+    id: 13,
+    title: "Priority Film 04",
+    client: "Selected Work",
+    category: "Brand Film",
+    year: "2025",
+    aspect: "landscape",
+    size: "wide",
+    gradient: "from-stone-950 via-neutral-900 to-neutral-950",
+    accentColor: "#D7D7D7",
+    description: "A selected 16:9 film piece added to the priority YouTube work set.",
+    youtubeId: "my3Ubc-f_ME",
+    tags: ["Film", "Edit", "YouTube"],
+  },
+  {
+    id: 14,
+    title: "Priority Film 05",
+    client: "Selected Work",
+    category: "Brand Film",
+    year: "2025",
+    aspect: "landscape",
+    size: "wide",
+    gradient: "from-cyan-950 via-slate-950 to-neutral-950",
+    accentColor: "#D7D7D7",
+    description: "A selected 16:9 film piece added to the priority YouTube work set.",
+    youtubeId: "yXgBQYrWSV4",
+    tags: ["Film", "Edit", "YouTube"],
+  },
+  {
     id: 1,
     title: "Adrish Ghee",
     client: "Adrish",
@@ -49,8 +120,9 @@ export const projects: Project[] = [
     year: "2025",
     aspect: "landscape",
     size: "large",
-    gradient: "from-stone-900 via-orange-950 to-stone-950",
-    accentColor: "#FF3D00",
+    gradient: "from-stone-900 via-zinc-900 to-stone-950",
+    accentColor: "#4A4A4A",
+    description: "A warm product-led brand film shaped around craft, purity, and everyday ritual.",
     videoSrc: "/projects/portrait/Adrish-Ghee.mp4",
     // imageSrc: "/projects/landscape/Adrish-Ghee-thumb.jpg",  ← optional poster
     tags: ["Film", "Motion", "Brand"],
@@ -64,7 +136,8 @@ export const projects: Project[] = [
     aspect: "landscape",
     size: "wide",
     gradient: "from-cyan-950 via-teal-900 to-slate-950",
-    accentColor: "#CDFF00",
+    accentColor: "#D7D7D7",
+    description: "A cinematic title treatment built with sharp type, atmosphere, and dramatic pacing.",
     youtubeId: "NqM0SGt_RZM",
     tags: ["Film", "Typography", "VFX"],
   },
@@ -81,6 +154,7 @@ export const projects: Project[] = [
     size: "medium",
     gradient: "from-violet-950 via-indigo-900 to-slate-950",
     accentColor: "#9E9EFF",
+    description: "A direct motion piece using type and rhythm to frame a clean, anti-plastic message.",
     // youtubeId: "VIDEO_ID",   ← paste your YouTube ID here
     videoSrc: "/projects/portrait/Arani_No Plastic.mp4",
     tags: ["Typography", "Motion"],
@@ -98,7 +172,8 @@ export const projects: Project[] = [
     aspect: "square",
     size: "medium",
     gradient: "from-pink-900 via-rose-950 to-stone-950",
-    accentColor: "#CDFF00",
+    accentColor: "#D7D7D7",
+    description: "A social-first visual piece with expressive motion, soft product energy, and campaign polish.",
     // imageSrc: "/projects/square/bloom.jpg",
     videoSrc: "/projects/portrait/cocomama_reel.mp4",
     tags: ["Identity", "Art Direction"],
@@ -112,7 +187,8 @@ export const projects: Project[] = [
     aspect: "square",
     size: "medium",
     gradient: "from-yellow-950 via-amber-900 to-stone-950",
-    accentColor: "#CDFF00",
+    accentColor: "#D7D7D7",
+    description: "A brand campaign edit balancing mood, identity, and motion-led storytelling.",
     youtubeId: "bNejx-mptFQ",
     // videoSrc: "/projects/portrait/cocomama_reel.mp4",
     // videoSrc: "/projects/square/undercurrent.mp4",
@@ -127,7 +203,8 @@ export const projects: Project[] = [
     aspect: "landscape",
     size: "wide",
     gradient: "from-emerald-950 via-teal-900 to-slate-950",
-    accentColor: "#CDFF00",
+    accentColor: "#D7D7D7",
+    description: "A motion graphics piece with fast transitions, clean product energy, and bold brand moments.",
     // videoSrc: "/projects/portrait/cocomama_reel.mp4",
     // videoSrc: "/projects/square/orbit.mp4",
     youtubeId: "fCdJaUdaxYc",
@@ -143,7 +220,8 @@ export const projects: Project[] = [
     aspect: "landscape",
     size: "wide",
     gradient: "from-emerald-950 via-teal-900 to-slate-950",
-    accentColor: "#CDFF00",
+    accentColor: "#D7D7D7",
+    description: "A compact motion edit built for momentum, clarity, and high-impact digital viewing.",
     // videoSrc: "/projects/square/orbit.mp4",
     youtubeId: "ZPal_EHbgGU",
     tags: ["Motion", "Brand"],
@@ -168,15 +246,16 @@ export interface MotionItem {
   gifSrc?: string;
   youtubeId?: string;
   loopVideo?: boolean;  // YouTube only: true = autoplay muted loop in card, false = thumbnail + click to play (default)
+  description?: string;
   gradient: string;
 }
 
 export const motionItems: MotionItem[] = [
-  { id: 1, title: "Motion Piece 1", aspect: "landscape", youtubeId: "k58PcKYfQMg", loopVideo: true, gradient: "from-slate-900 via-zinc-900 to-neutral-950" },
-  { id: 2, title: "Motion Piece 2", aspect: "landscape", youtubeId: "D3cvdL24wy4", loopVideo: true, gradient: "from-violet-950 via-indigo-900 to-slate-950" },
-  { id: 3, title: "Motion Piece 3", aspect: "landscape", youtubeId: "FyT9WRZDLTM", loopVideo: true, gradient: "from-orange-950 via-red-950 to-stone-950" },
-  { id: 4, title: "Motion Piece 4", aspect: "landscape", youtubeId: "thBymxP71pE", loopVideo: true, gradient: "from-teal-950 via-cyan-900 to-slate-950" },
-  { id: 5, title: "Motion Piece 5", aspect: "landscape", youtubeId: "MeyJKgAea_s", loopVideo: true, gradient: "from-emerald-950 via-green-900 to-slate-950" },
+  { id: 1, title: "Motion Piece 1", aspect: "landscape", youtubeId: "k58PcKYfQMg", loopVideo: true, description: "Looping motion study with crisp timing, layered transitions, and editorial rhythm.", gradient: "from-slate-900 via-zinc-900 to-neutral-950" },
+  { id: 2, title: "Motion Piece 2", aspect: "landscape", youtubeId: "D3cvdL24wy4", loopVideo: true, description: "A polished animation sequence built around movement, contrast, and visual pace.", gradient: "from-violet-950 via-indigo-900 to-slate-950" },
+  { id: 3, title: "Motion Piece 3", aspect: "landscape", youtubeId: "FyT9WRZDLTM", loopVideo: true, description: "Energetic motion graphics with bold cuts and a punchy campaign-ready feel.", gradient: "from-zinc-950 via-neutral-900 to-stone-950" },
+  { id: 4, title: "Motion Piece 4", aspect: "landscape", youtubeId: "thBymxP71pE", loopVideo: true, description: "A sleek title-style loop focused on timing, composition, and atmosphere.", gradient: "from-teal-950 via-cyan-900 to-slate-950" },
+  { id: 5, title: "Motion Piece 5", aspect: "landscape", youtubeId: "MeyJKgAea_s", loopVideo: true, description: "A clean motion edit with smooth visual flow and brand-friendly pacing.", gradient: "from-emerald-950 via-green-900 to-slate-950" },
 ];
 
 export const clients = [
@@ -187,18 +266,24 @@ export const clients = [
 export const services = [
   {
     num: "01",
+    title: "Creative Production",
+    desc: "End-to-end creative support for brand films, campaigns, reels, and launch assets — from concept to final delivery.",
+    tags: ["Concept", "Brand Films", "Campaigns", "Launch Assets"],
+  },
+  {
+    num: "02",
     title: "Video Editing",
     desc: "Reels, brand films, and social videos cut with rhythm and purpose — from raw footage to final export.",
     tags: ["Reels", "Brand Films", "Social Video", "Short-form"],
   },
   {
-    num: "02",
+    num: "03",
     title: "Motion Design",
     desc: "Animated graphics, title sequences, and transitions that make static ideas feel alive.",
     tags: ["Animated Graphics", "Title Sequences", "Motion Graphics"],
   },
   {
-    num: "03",
+    num: "04",
     title: "Design",
     desc: "Mockups, brochures, infographics, event collaterals, and social media posts built to communicate and convert.",
     tags: ["Mockups", "Brochures & Infographics", "Event Collaterals", "Social Media"],

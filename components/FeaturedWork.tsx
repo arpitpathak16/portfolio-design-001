@@ -1,44 +1,75 @@
 "use client";
 
-import { useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import ProjectCard from "./ProjectCard";
 import { projects } from "@/lib/data";
 import type { Project } from "@/lib/data";
 
-function byAspect(list: Project[], aspect: Project["aspect"]) {
-  return list.filter((p) => p.aspect === aspect);
+function randomSortValue(seed: number, index: number) {
+  return Math.sin(seed * 1000 + index * 91.7) * 10000 % 1;
 }
+
+function shuffleWithSeed<T>(list: T[], seed: number) {
+  return list
+    .map((item, index) => ({ item, sortKey: randomSortValue(seed, index) }))
+    .sort((a, b) => a.sortKey - b.sortKey)
+    .map(({ item }) => item);
+}
+
+type WorkLayer =
+  | { type: "split"; left?: Project; right?: Project; rightShape: "portrait" | "landscape" }
+  | { type: "wide"; project: Project }
+  | { type: "trio"; left?: Project; leftShape: "portrait" | "landscape"; middle?: Project; right?: Project; rightShape: "portrait" | "landscape" };
 
 export default function FeaturedWork() {
   const headRef = useRef<HTMLDivElement>(null);
   const inView  = useInView(headRef, { once: true, margin: "-10%" });
+  const [layoutSeed] = useState(() => Math.random());
 
-  const landscapes = byAspect(projects, "landscape");
-  const portraits  = byAspect(projects, "portrait");
-  const squares    = byAspect(projects, "square");
+  const layout = useMemo<WorkLayer[]>(() => {
+    const wides = shuffleWithSeed(projects.filter((project) => project.youtubeId), layoutSeed || 0.31);
+    const verticals = shuffleWithSeed(projects.filter((project) => project.videoSrc), layoutSeed || 0.67);
+    const layers: WorkLayer[] = [];
+    const takePortraitOrLandscape = () => {
+      const portrait = verticals.shift();
+      if (portrait) return { project: portrait, shape: "portrait" as const };
 
-  // Fixed slots
-  const hero   = landscapes[0] ?? projects[0];
-  const tall   = portraits[0]  ?? squares[0] ?? projects[1];
-  const banner = landscapes[1] ?? landscapes[0];
+      const landscape = wides.shift();
+      if (landscape) return { project: landscape, shape: "landscape" as const };
 
-  // Middle row: up to 3 squares
-  const midCards = squares.slice(0, 3);
+      return { project: undefined, shape: "portrait" as const };
+    };
 
-  // Anything not yet placed goes in the overflow row
-  const placed = new Set([hero.id, tall.id, banner.id, ...midCards.map((p) => p.id)]);
-  const overflow = projects.filter((p) => !placed.has(p.id));
+    while (wides.length > 0 || verticals.length > 0) {
+      const splitWide = wides.shift();
+      const splitRight = takePortraitOrLandscape();
+      if (splitWide || splitRight.project) {
+        layers.push({ type: "split", left: splitWide, right: splitRight.project, rightShape: splitRight.shape });
+      }
 
-  // chunk overflow into rows of 2 or 3 depending on count
-  const overflowRows: Project[][] = [];
-  let i = 0;
-  while (i < overflow.length) {
-    const remaining = overflow.length - i;
-    const size = remaining === 2 || remaining % 3 === 2 ? 2 : 3;
-    overflowRows.push(overflow.slice(i, i + size));
-    i += size;
-  }
+      const bigWide = wides.shift();
+      if (bigWide) {
+        layers.push({ type: "wide", project: bigWide });
+      }
+
+      const left = takePortraitOrLandscape();
+      const middleWide = wides.shift();
+      const right = takePortraitOrLandscape();
+      if (left.project || middleWide || right.project) {
+        layers.push({
+          type: "trio",
+          left: left.project,
+          leftShape: left.shape,
+          middle: middleWide,
+          right: right.project,
+          rightShape: right.shape,
+        });
+      }
+    }
+
+    return layers;
+  }, [layoutSeed]);
 
   let cardIndex = 0;
 
@@ -56,7 +87,7 @@ export default function FeaturedWork() {
           >
             Selected
             <br />
-            <em className="font-serif not-italic text-[#FF3D00]">Work</em>
+            <em className="font-serif not-italic text-[#4A4A4A]">Work</em>
           </motion.h2>
         </div>
 
@@ -71,54 +102,83 @@ export default function FeaturedWork() {
           </p>
           <a
             href="#"
-            className="mt-4 inline-flex items-center gap-2 text-label text-[#FF3D00] hover:gap-4 transition-all duration-300"
+            className="mt-4 inline-flex items-center gap-2 text-label text-[#4A4A4A] hover:gap-4 transition-all duration-300"
           >
             All projects
             <svg width="14" height="10" viewBox="0 0 14 10" fill="none">
-              <path d="M1 5h12M8 1l4 4-4 4" stroke="#FF3D00" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M1 5h12M8 1l4 4-4 4" stroke="#4A4A4A" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </a>
         </motion.div>
       </div>
 
-      {/* ── Grid ─────────────────────────────────────────────────── */}
-      <div className="grid gap-3 md:gap-4">
+      {/* ── Layered video layout ─────────────────────────────────── */}
+      <div className="mb-4 grid grid-cols-2 gap-3 border-y border-[#D8D3CA] py-3 md:flex md:items-center md:justify-between">
+        <p className="text-label text-[#888888]">16:9 YouTube Films</p>
+        <p className="text-label text-[#888888]">9:16 Local Reels</p>
+      </div>
 
-        {/* Row 1: hero (2/3) + tall portrait (1/3) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
-          <ProjectCard project={hero} index={cardIndex++} className="md:col-span-2 h-[56vw] md:h-[40vw] max-h-[600px]" />
-          <ProjectCard project={tall} index={cardIndex++} className="h-[75vw] md:h-[40vw] max-h-[600px]" />
-        </div>
+      <div className="grid gap-6 md:gap-8">
+        {layout.map((layer, layerIndex) => {
+          if (layer.type === "split") {
+            return (
+              <div key={`split-${layerIndex}`} className="grid grid-cols-1 gap-4 md:grid-cols-12 md:items-stretch md:gap-5 md:h-[46vw] md:max-h-[700px]">
+                {layer.left && (
+                  <ProjectCard
+                    project={layer.left}
+                    index={cardIndex++}
+                    className={`aspect-video md:aspect-auto md:h-full ${layer.right ? "md:col-span-8" : "md:col-span-12"}`}
+                  />
+                )}
+                {layer.right && (
+                  <ProjectCard
+                    project={layer.right}
+                    index={cardIndex++}
+                    className={`${layer.rightShape === "portrait" ? "aspect-[9/16]" : "aspect-video"} md:aspect-auto md:h-full ${layer.left ? "md:col-span-4" : "md:col-span-6 md:col-start-4"}`}
+                  />
+                )}
+              </div>
+            );
+          }
 
-        {/* Row 2: up to three square cards */}
-        {midCards.length > 0 && (
-          <div className={`grid grid-cols-1 gap-3 md:gap-4 ${midCards.length === 2 ? "sm:grid-cols-2" : "sm:grid-cols-3"}`}>
-            {midCards.map((p) => (
-              <ProjectCard key={p.id} project={p} index={cardIndex++} className="h-[80vw] sm:h-[30vw] max-h-[400px]" />
-            ))}
-          </div>
-        )}
+          if (layer.type === "wide") {
+            return (
+              <div key={`wide-${layer.project.id}-${layerIndex}`} className="py-2 md:py-6">
+                <ProjectCard
+                  project={layer.project}
+                  index={cardIndex++}
+                  className="aspect-video w-full"
+                />
+              </div>
+            );
+          }
 
-        {/* Row 3: full-width landscape banner */}
-        <ProjectCard project={banner} index={cardIndex++} className="h-[50vw] md:h-[34vw] max-h-[500px]" />
-
-        {/* Overflow rows: any projects not in the fixed slots above */}
-        {overflowRows.map((row, ri) => (
-          <div
-            key={ri}
-            className={`grid grid-cols-1 gap-3 md:gap-4 ${row.length === 2 ? "sm:grid-cols-2" : "sm:grid-cols-3"}`}
-          >
-            {row.map((p) => (
-              <ProjectCard
-                key={p.id}
-                project={p}
-                index={cardIndex++}
-                className={row.length === 2 ? "h-[56vw] sm:h-[36vw] max-h-[500px]" : "h-[80vw] sm:h-[30vw] max-h-[400px]"}
-              />
-            ))}
-          </div>
-        ))}
-
+          return (
+            <div key={`trio-${layerIndex}`} className="grid grid-cols-1 gap-4 md:grid-cols-12 md:items-stretch md:gap-5 md:h-[40vw] md:max-h-[620px]">
+              {layer.left && (
+                <ProjectCard
+                  project={layer.left}
+                  index={cardIndex++}
+                  className={`${layer.leftShape === "portrait" ? "aspect-[9/16]" : "aspect-video"} md:aspect-auto md:h-full ${layer.right ? "md:col-span-3" : "md:col-span-4"}`}
+                />
+              )}
+              {layer.middle && (
+                <ProjectCard
+                  project={layer.middle}
+                  index={cardIndex++}
+                  className={`aspect-video md:aspect-auto md:h-full ${layer.left && layer.right ? "md:col-span-6" : "md:col-span-8"}`}
+                />
+              )}
+              {layer.right && (
+                <ProjectCard
+                  project={layer.right}
+                  index={cardIndex++}
+                  className={`${layer.rightShape === "portrait" ? "aspect-[9/16]" : "aspect-video"} md:aspect-auto md:h-full md:col-span-3`}
+                />
+              )}
+            </div>
+          );
+        })}
       </div>
     </section>
   );
