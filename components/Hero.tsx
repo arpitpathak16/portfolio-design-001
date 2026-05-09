@@ -61,7 +61,7 @@ export default function Hero() {
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <video
           ref={videoRef}
-          src="/projects/landscape/Portfolio_Video2.mp4"
+          src="/projects/landscape/Portfolio_Video2_web.mp4"
           muted
           loop
           autoPlay

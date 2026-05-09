@@ -123,7 +123,7 @@ export const projects: Project[] = [
     gradient: "from-stone-900 via-zinc-900 to-stone-950",
     accentColor: "#4A4A4A",
     description: "A warm product-led brand film shaped around craft, purity, and everyday ritual.",
-    videoSrc: "/projects/portrait/Adrish-Ghee.mp4",
+    videoSrc: "/projects/portrait/Adrish-Ghee_web.mp4",
     // imageSrc: "/projects/landscape/Adrish-Ghee-thumb.jpg",  ← optional poster
     tags: ["Film", "Motion", "Brand"],
   },
@@ -156,7 +156,7 @@ export const projects: Project[] = [
     accentColor: "#9E9EFF",
     description: "A direct motion piece using type and rhythm to frame a clean, anti-plastic message.",
     // youtubeId: "VIDEO_ID",   ← paste your YouTube ID here
-    videoSrc: "/projects/portrait/Arani_No Plastic.mp4",
+    videoSrc: "/projects/portrait/Arani_No Plastic_web.mp4",
     tags: ["Typography", "Motion"],
   },
 
@@ -175,7 +175,7 @@ export const projects: Project[] = [
     accentColor: "#D7D7D7",
     description: "A social-first visual piece with expressive motion, soft product energy, and campaign polish.",
     // imageSrc: "/projects/square/bloom.jpg",
-    videoSrc: "/projects/portrait/cocomama_reel.mp4",
+    videoSrc: "/projects/portrait/cocomama_reel_web.mp4",
     tags: ["Identity", "Art Direction"],
   },
   {
