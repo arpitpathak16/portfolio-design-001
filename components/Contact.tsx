@@ -4,8 +4,8 @@ import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
 const socials = [
-  { label: "Instagram", href: "#" },
-  { label: "LinkedIn",  href: "#" },
+  { label: "Instagram", href: "https://www.instagram.com/fake_firangi" },
+  { label: "LinkedIn",  href: "https://www.linkedin.com/in/apoorva-anand-a12b47119" },
 ];
 
 export default function Contact() {

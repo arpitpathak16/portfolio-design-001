@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useAnimationFrame, useMotionValue, AnimatePresence } from "framer-motion";
 
@@ -57,12 +57,29 @@ function Track({
 }: {
   images: string[]; cardW: number; cardH: number; unit: number; onOpen: (src: string) => void;
 }) {
+  const ref = useRef<HTMLDivElement>(null);
   const x      = useMotionValue(0);
   const paused = useRef(false);
+  const visible = useRef(false);
   const totalW = images.length * unit;
 
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        visible.current = entry.isIntersecting;
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
   useAnimationFrame((_, delta) => {
-    if (paused.current) return;
+    if (paused.current || !visible.current) return;
     x.set(x.get() - (delta / 1000) * SPEED);
     if (x.get() < -totalW) x.set(x.get() + totalW);
   });
@@ -71,6 +88,7 @@ function Track({
 
   return (
     <motion.div
+      ref={ref}
       style={{ x }}
       className="flex"
       onHoverStart={() => { paused.current = true; }}

@@ -1,43 +1,59 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 
 const roles = ["Video Editing", "Motion Design", "Brand Design", "Creative Production"];
 
+// Hero headline is temporarily hidden to keep the video clear.
 // Renders a word as letter-by-letter animated spans inside a nowrap container
 // so the browser can only line-break BETWEEN words, never inside one.
-function AnimatedWord({
-  word, startDelay, className = "",
-}: { word: string; startDelay: number; className?: string }) {
-  return (
-    <span className={`inline-block overflow-hidden whitespace-nowrap align-baseline ${className}`}>
-      {word.split("").map((char, i) => (
-        <motion.span
-          key={i}
-          className="inline-block"
-          initial={{ y: "95%", opacity: 0, filter: "blur(10px)" }}
-          animate={{ y: "0%", opacity: 1, filter: "blur(0px)" }}
-          transition={{ delay: startDelay + i * 0.035, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-        >
-          {char}
-        </motion.span>
-      ))}
-    </span>
-  );
-}
+// function AnimatedWord({
+//   word, startDelay, className = "",
+// }: { word: string; startDelay: number; className?: string }) {
+//   return (
+//     <span className={`inline-block overflow-hidden whitespace-nowrap align-baseline ${className}`}>
+//       {word.split("").map((char, i) => (
+//         <motion.span
+//           key={i}
+//           className="inline-block"
+//           initial={{ y: "95%", opacity: 0, filter: "blur(10px)" }}
+//           animate={{ y: "0%", opacity: 1, filter: "blur(0px)" }}
+//           transition={{ delay: startDelay + i * 0.035, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+//         >
+//           {char}
+//         </motion.span>
+//       ))}
+//     </span>
+//   );
+// }
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const { scrollY } = useScroll();
-  const yText       = useTransform(scrollY, [0, 600], ["0%", "18%"]);
   const opacityFade = useTransform(scrollY, [0, 420], [1, 0]);
 
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (latest > window.innerHeight * 0.9) {
+      video.pause();
+    } else {
+      video.play().catch(() => {});
+    }
+  });
+
+  useEffect(() => {
+    videoRef.current?.play().catch(() => {});
+  }, []);
+
   // Delays: each word starts after the previous word's letters finish
-  const d1 = 0.8;                          // CRAFT
-  const d2 = d1 + "CRAFT".length  * 0.035 + 0.04; // THAT
-  const d3 = d2 + "THAT".length   * 0.035 + 0.04; // MOVES
-  const d4 = d3 + "MOVES".length  * 0.035 + 0.04; // PEOPLE.
+  // const d1 = 0.8;                          // CRAFT
+  // const d2 = d1 + "CRAFT".length  * 0.035 + 0.04; // THAT
+  // const d3 = d2 + "THAT".length   * 0.035 + 0.04; // MOVES
+  // const d4 = d3 + "MOVES".length  * 0.035 + 0.04; // PEOPLE.
 
   return (
     <section
@@ -47,7 +63,8 @@ export default function Hero() {
       {/* Background reel */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <video
-          src="/projects/portrait/Adrish-Ghee.mp4"
+          ref={videoRef}
+          src="/projects/landscape/Portfolio_Video.mp4"
           muted
           loop
           autoPlay
@@ -55,13 +72,13 @@ export default function Hero() {
           preload="metadata"
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-[#F5F0E8]/60" />
+        <div className="absolute inset-0 bg-[#F5F0E8]/1" />
       </div>
 
       {/* Eyebrow */}
 
 
-      {/* Hero headline */}
+      {/* Hero headline
       <motion.div className="relative z-10" style={{ y: yText, opacity: opacityFade }}>
         <h1
           className="text-hero text-[#080808] leading-[0.9]"
@@ -76,6 +93,7 @@ export default function Hero() {
           <AnimatedWord word="PEOPLE." startDelay={d4} />
         </h1>
       </motion.div>
+      */}
 
       {/* Descriptor row */}
       <motion.div

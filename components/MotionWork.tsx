@@ -246,7 +246,7 @@ export default function MotionWork() {
 
       <div className="mb-4 grid grid-cols-2 gap-3 border-y border-[#D8D3CA] py-3 md:flex md:items-center md:justify-between">
         <p className="text-label text-[#888888]">Landscape Motion Reels</p>
-        <p className="text-label text-[#888888]">Looping 16:9 Frames</p>
+        <p className="text-label text-[#888888]">16:9 Frames</p>
       </div>
 
       {/* Landscape reel wall */}

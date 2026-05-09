@@ -115,7 +115,7 @@ export default function FeaturedWork() {
       {/* ── Layered video layout ─────────────────────────────────── */}
       <div className="mb-4 grid grid-cols-2 gap-3 border-y border-[#D8D3CA] py-3 md:flex md:items-center md:justify-between">
         <p className="text-label text-[#888888]">16:9 YouTube Films</p>
-        <p className="text-label text-[#888888]">9:16 Local Reels</p>
+        <p className="text-label text-[#888888]">9:16 Reels</p>
       </div>
 
       <div className="grid gap-6 md:gap-8">
