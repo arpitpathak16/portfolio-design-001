@@ -6,17 +6,6 @@ import { motionItems } from "@/lib/data";
 import type { MotionItem } from "@/lib/data";
 import VideoModal from "./VideoModal";
 
-function randomSortValue(seed: number, index: number) {
-  return Math.sin(seed * 1000 + index * 91.7) * 10000 % 1;
-}
-
-function shuffleWithSeed<T>(list: T[], seed: number) {
-  return list
-    .map((item, index) => ({ item, sortKey: randomSortValue(seed, index) }))
-    .sort((a, b) => a.sortKey - b.sortKey)
-    .map(({ item }) => item);
-}
-
 function MotionCard({
   item,
   index,
@@ -207,12 +196,8 @@ function MotionCard({
 export default function MotionWork() {
   const headRef = useRef<HTMLDivElement>(null);
   const inView  = useInView(headRef, { once: true, margin: "-10%" });
-  const [layoutSeed] = useState(() => Math.random());
 
-  const landscapes = shuffleWithSeed(
-    motionItems.filter(i => i.aspect === "landscape"),
-    layoutSeed || 0.52
-  );
+  const landscapes = motionItems.filter(i => i.aspect === "landscape");
   const leadItems = landscapes.filter((_, index) => index % 3 === 0);
   const pairItems = landscapes.filter((_, index) => index % 3 !== 0);
 
@@ -224,14 +209,14 @@ export default function MotionWork() {
       <div ref={headRef} className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 md:mb-14">
         <div className="overflow-hidden pb-3">
           <motion.h2
-            className="text-display text-[#080808] leading-[1.03]"
+            className="font-google-sans text-display font-normal text-[#080808] leading-[1.03]"
             initial={{ y: "100%" }}
             animate={inView ? { y: 0 } : {}}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             Motion
             <br />
-            <em className="font-serif not-italic text-[#4A4A4A]">Design</em>
+            <span className="font-semibold text-[#4A4A4A]">Design</span>
           </motion.h2>
         </div>
         <motion.p

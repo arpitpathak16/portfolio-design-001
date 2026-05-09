@@ -1,6 +1,14 @@
 @import "tailwindcss";
 
 @font-face {
+  font-family: "Google Sans Flex";
+  src: url("/fonts/GoogleSansFlex-Variable.ttf") format("truetype");
+  font-weight: 100 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "Mabry Pro";
   src: url("/fonts/MabryPro-Regular.ttf") format("truetype");
   font-weight: 300 700;
@@ -21,6 +29,7 @@
   --color-violet:     #9E9EFF;
 
   /* ── Fonts ── */
+  --font-google-sans: "Google Sans Flex", var(--font-space-grotesk);
   --font-display: "Mabry Pro", var(--font-space-grotesk);
   --font-body:    "Mabry Pro", var(--font-dm-sans);
   --font-serif:   var(--font-dm-serif);
@@ -104,6 +113,14 @@ body {
   text-transform: uppercase;
   font-family: var(--font-display), sans-serif;
   font-weight: 500;
+}
+
+.font-display {
+  font-family: var(--font-display), sans-serif;
+}
+
+.font-google-sans {
+  font-family: var(--font-google-sans), sans-serif;
 }
 
 /* ── Marquee animation ── */

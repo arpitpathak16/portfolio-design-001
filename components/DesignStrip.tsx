@@ -155,9 +155,9 @@ export default function DesignStrip() {
       <div className="px-6 md:px-10 flex items-end justify-between mb-10">
         <div>
           <p className="text-label text-[#666666] mb-2">— Social Media &amp; Design</p>
-          <h2 className="text-display text-[#080808]">
+          <h2 className="font-google-sans text-display font-normal text-[#080808]">
             Design<br />
-            <em className="font-serif not-italic text-[#777777]">Work</em>
+            <span className="font-semibold text-[#777777]">Work</span>
           </h2>
         </div>
         <button

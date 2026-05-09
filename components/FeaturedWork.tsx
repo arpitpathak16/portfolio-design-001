@@ -1,21 +1,10 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import ProjectCard from "./ProjectCard";
 import { projects } from "@/lib/data";
 import type { Project } from "@/lib/data";
-
-function randomSortValue(seed: number, index: number) {
-  return Math.sin(seed * 1000 + index * 91.7) * 10000 % 1;
-}
-
-function shuffleWithSeed<T>(list: T[], seed: number) {
-  return list
-    .map((item, index) => ({ item, sortKey: randomSortValue(seed, index) }))
-    .sort((a, b) => a.sortKey - b.sortKey)
-    .map(({ item }) => item);
-}
 
 type WorkLayer =
   | { type: "split"; left?: Project; right?: Project; rightShape: "portrait" | "landscape" }
@@ -25,11 +14,10 @@ type WorkLayer =
 export default function FeaturedWork() {
   const headRef = useRef<HTMLDivElement>(null);
   const inView  = useInView(headRef, { once: true, margin: "-10%" });
-  const [layoutSeed] = useState(() => Math.random());
 
   const layout = useMemo<WorkLayer[]>(() => {
-    const wides = shuffleWithSeed(projects.filter((project) => project.youtubeId), layoutSeed || 0.31);
-    const verticals = shuffleWithSeed(projects.filter((project) => project.videoSrc), layoutSeed || 0.67);
+    const wides = [...projects.filter((project) => project.youtubeId)];
+    const verticals = [...projects.filter((project) => project.videoSrc)];
     const layers: WorkLayer[] = [];
     const takePortraitOrLandscape = () => {
       const portrait = verticals.shift();
@@ -69,47 +57,38 @@ export default function FeaturedWork() {
     }
 
     return layers;
-  }, [layoutSeed]);
+  }, []);
 
   let cardIndex = 0;
 
   return (
     <section id="work" className="px-6 md:px-10 py-20 md:py-28">
 
+      <motion.p
+        className="mb-10 max-w-4xl text-heading text-[#080808] md:mb-14"
+        initial={{ opacity: 0, y: 24 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      >
+        Partnering with brands to define,
+        <br />
+        structure, and scale motion.
+      </motion.p>
+
       {/* Header */}
-      <div ref={headRef} className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 md:mb-14">
+      <div ref={headRef} className="mb-10 md:mb-14">
         <div className="overflow-hidden">
           <motion.h2
-            className="text-display text-[#080808]"
+            className="font-google-sans text-display font-normal text-[#080808]"
             initial={{ y: "100%" }}
             animate={inView ? { y: 0 } : {}}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            Selected
+            Creative Direction & Editing
             <br />
-            <em className="font-serif not-italic text-[#4A4A4A]">Work</em>
+            <span className="font-semibold text-[#4A4A4A]">Work</span>
           </motion.h2>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.3, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="md:max-w-xs"
-        >
-          <p className="text-[#666666] text-sm leading-relaxed">
-            A selection of recent projects spanning brand film, motion design, and visual identity.
-          </p>
-          <a
-            href="#"
-            className="mt-4 inline-flex items-center gap-2 text-label text-[#4A4A4A] hover:gap-4 transition-all duration-300"
-          >
-            All projects
-            <svg width="14" height="10" viewBox="0 0 14 10" fill="none">
-              <path d="M1 5h12M8 1l4 4-4 4" stroke="#4A4A4A" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </a>
-        </motion.div>
       </div>
 
       {/* ── Layered video layout ─────────────────────────────────── */}

@@ -15,14 +15,14 @@ export default function Services() {
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-10 mb-16">
           <div className="overflow-hidden">
             <motion.h2
-              className="text-display text-[#080808]"
+              className="font-google-sans text-display font-normal text-[#080808]"
               initial={{ y: "100%" }}
               animate={inView ? { y: 0 } : {}}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
               What I
               <br />
-              <em className="font-serif not-italic text-[#4A4A4A]">Create</em>
+              <span className="font-semibold text-[#4A4A4A]">Create</span>
             </motion.h2>
           </div>
 

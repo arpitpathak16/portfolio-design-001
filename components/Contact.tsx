@@ -42,7 +42,7 @@ export default function Contact() {
           >
             Have something in mind?
             <br />
-            <em className="font-serif not-italic text-[#666666]">Let&apos;s create it.</em>
+            <span className="text-[#666666]">Let&apos;s create it.</span>
           </motion.h2>
         </div>
 

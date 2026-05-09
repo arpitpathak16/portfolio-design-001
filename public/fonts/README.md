@@ -1,6 +1,6 @@
 # Mabry Font Files
 
-`MabryPro-Regular.ttf` is installed here and used globally by `app/globals.css`.
+`MabryPro-Regular.ttf` and `GoogleSansFlex-Variable.ttf` are installed here and used by `app/globals.css`.
 
 For true font-weight variations, add the matching licensed Mabry Pro files here
 and register them in `app/globals.css`, for example:

@@ -18,7 +18,6 @@ export default function Home() {
       <Navigation />
       <div className="h-screen pointer-events-none" aria-hidden="true" />
       <div className="relative z-20 bg-[#F5F0E8]">
-        <MarqueeStrip variant="dark" />
         <FeaturedWork />
         <MarqueeStrip variant="light" />
         <MotionWork />

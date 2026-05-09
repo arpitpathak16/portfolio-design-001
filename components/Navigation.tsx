@@ -24,16 +24,8 @@ export default function Navigation() {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-        className="fixed top-0 left-0 right-0 z-10 px-6 md:px-10 py-6 flex items-start justify-between"
+        className="fixed top-0 left-0 right-0 z-10 px-6 md:px-10 py-6 flex items-start justify-end"
       >
-        {/* Logo */}
-        <a
-          href="#"
-          className="rounded-md border border-[#D8D3CA] bg-[#F8F8F8] px-4 py-3 text-sm font-bold leading-none tracking-[0.08em] text-[#080808] shadow-[0_0_0_1px_rgba(0,0,0,0.04)] transition-colors duration-300 hover:text-[#4A4A4A]"
-        >
-          Apoorva
-        </a>
-
         {/* Desktop links */}
         <nav className="hidden md:flex overflow-hidden rounded-md border border-[#D8D3CA] bg-[#F8F8F8] shadow-[0_0_0_1px_rgba(0,0,0,0.04)]">
           {navLinks.map((link) => (
