@@ -37,7 +37,7 @@ export default function VideoModal({
   }, [isOpen]);
 
   const embedSrc = youtubeId
-    ? `https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1&color=white`
+    ? `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1&color=white`
     : null;
 
   return (

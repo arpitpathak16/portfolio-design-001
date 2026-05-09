@@ -5,6 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { motionItems } from "@/lib/data";
 import type { MotionItem } from "@/lib/data";
 import VideoModal from "./VideoModal";
+import YouTubePreview from "./YouTubePreview";
 
 function MotionCard({
   item,
@@ -17,19 +18,14 @@ function MotionCard({
 }) {
   const ref       = useRef<HTMLDivElement>(null);
   const videoRef  = useRef<HTMLVideoElement>(null);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
   const inView    = useInView(ref, { once: true, margin: "-10%" });
   const [modalOpen, setModalOpen] = useState(false);
 
-  const youtubeLoop = !!(item.youtubeId && item.loopVideo);
   const isClickable = !!(item.youtubeId || item.videoSrc);
   const aspectClass = item.aspect === "portrait" ? "aspect-[9/16]"
                     : item.aspect === "square"   ? "aspect-square"
                     : "aspect-video";
 
-  const thumbnail = item.youtubeId
-    ? `https://img.youtube.com/vi/${item.youtubeId}/maxresdefault.jpg`
-    : null;
   const hoverDescription =
     item.description ??
     `${item.title} explores motion, timing, and visual rhythm in a compact loop.`;
@@ -52,33 +48,15 @@ function MotionCard({
     return () => observer.disconnect();
   }, [item.videoSrc]);
 
-  // Play/pause YouTube loop iframe on scroll
-  useEffect(() => {
-    const iframe = iframeRef.current;
-    if (!iframe || !youtubeLoop) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        const func = entry.isIntersecting ? "playVideo" : "pauseVideo";
-        iframe.contentWindow?.postMessage(JSON.stringify({ event: "command", func, args: "" }), "*");
-      },
-      { threshold: 0.25 }
-    );
-    observer.observe(iframe);
-    return () => observer.disconnect();
-  }, [youtubeLoop]);
-
   // Pause background media while modal is open
   useEffect(() => {
     const video  = videoRef.current;
-    const iframe = iframeRef.current;
     if (modalOpen) {
       video?.pause();
-      iframe?.contentWindow?.postMessage(JSON.stringify({ event: "command", func: "pauseVideo", args: "" }), "*");
     } else {
       video?.play().catch(() => {});
-      if (youtubeLoop) iframe?.contentWindow?.postMessage(JSON.stringify({ event: "command", func: "playVideo", args: "" }), "*");
     }
-  }, [modalOpen, youtubeLoop]);
+  }, [modalOpen]);
 
   return (
     <>
@@ -91,53 +69,14 @@ function MotionCard({
         data-cursor-label={isClickable ? "play" : undefined}
         className={`relative ${aspectClass} overflow-hidden group cursor-none ${className}`}
       >
-        {/* Media — priority: YouTube (loop) > YouTube (thumbnail) > local video > GIF > gradient */}
+        {/* Media — priority: YouTube thumbnail > local video > GIF > gradient */}
         <div className="absolute inset-0">
-          {youtubeLoop ? (
-            <>
-              <iframe
-                ref={iframeRef}
-                src={`https://www.youtube.com/embed/${item.youtubeId}?autoplay=1&mute=1&loop=1&playlist=${item.youtubeId}&controls=0&playsinline=1&enablejsapi=1&rel=0&modestbranding=1`}
-                allow="autoplay; encrypted-media"
-                className="absolute inset-0 w-full h-full pointer-events-none transition-[filter,transform] duration-700 group-hover:scale-[1.03] group-hover:blur-[6px]"
-                style={{ border: 0 }}
-              />
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="w-14 h-14 rounded-full bg-[#080808]/60 border border-[#F5F0E8]/20
-                                flex items-center justify-center
-                                group-hover:bg-[#D7D7D7] group-hover:border-[#D7D7D7]
-                                transition-all duration-300 scale-90 group-hover:scale-100">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M5 3l9 5-9 5V3z" fill="#F5F0E8"
-                          className="group-hover:fill-[#080808] transition-colors duration-300" />
-                  </svg>
-                </div>
-              </div>
-            </>
-          ) : item.youtubeId ? (
-            <>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={thumbnail!}
-                alt={item.title}
-                className="w-full h-full object-cover transition-[filter,transform] duration-700 group-hover:scale-105 group-hover:blur-[6px]"
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).src =
-                    `https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg`;
-                }}
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-14 h-14 rounded-full bg-[#080808]/60 border border-[#F5F0E8]/20
-                                flex items-center justify-center
-                                group-hover:bg-[#D7D7D7] group-hover:border-[#D7D7D7]
-                                transition-all duration-300 scale-90 group-hover:scale-100">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M5 3l9 5-9 5V3z" fill="#F5F0E8"
-                          className="group-hover:fill-[#080808] transition-colors duration-300" />
-                  </svg>
-                </div>
-              </div>
-            </>
+          {item.youtubeId ? (
+            <YouTubePreview
+              videoId={item.youtubeId}
+              title={item.title}
+              className="h-full w-full object-cover transition-[filter,transform] duration-700 group-hover:scale-105 group-hover:blur-[6px]"
+            />
           ) : item.videoSrc ? (
             <video
               ref={videoRef}

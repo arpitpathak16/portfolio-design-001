@@ -17,7 +17,6 @@ export interface Project {
   imageSrc?: string;       // local file: "/projects/thumb.jpg" — also used as video poster
   youtubeId?: string;      // YouTube video ID, e.g. "dQw4w9WgXcQ"
                            // thumbnail is fetched automatically; click opens lightbox
-  loopVideo?: boolean;     // YouTube only: true = autoplay muted loop in card, false = static thumbnail (default)
   // ─────────────────────────────────────────────────────────────────
   tags: string[];
 }
@@ -209,7 +208,6 @@ export const projects: Project[] = [
     // videoSrc: "/projects/square/orbit.mp4",
     youtubeId: "fCdJaUdaxYc",
     tags: ["Motion", "Brand"],
-    loopVideo: true, 
   },
   {
     id: 9,
@@ -225,7 +223,6 @@ export const projects: Project[] = [
     // videoSrc: "/projects/square/orbit.mp4",
     youtubeId: "ZPal_EHbgGU",
     tags: ["Film", "Brand"],
-    loopVideo: true, 
   },
 ];
 
@@ -245,17 +242,16 @@ export interface MotionItem {
   videoSrc?: string;
   gifSrc?: string;
   youtubeId?: string;
-  loopVideo?: boolean;  // YouTube only: true = autoplay muted loop in card, false = thumbnail + click to play (default)
   description?: string;
   gradient: string;
 }
 
 export const motionItems: MotionItem[] = [
-  { id: 1, title: "Motion Piece 1", aspect: "landscape", youtubeId: "k58PcKYfQMg", loopVideo: true, description: "Looping motion study with crisp timing, layered transitions, and editorial rhythm.", gradient: "from-slate-900 via-zinc-900 to-neutral-950" },
-  { id: 2, title: "Motion Piece 2", aspect: "landscape", youtubeId: "D3cvdL24wy4", loopVideo: true, description: "A polished animation sequence built around movement, contrast, and visual pace.", gradient: "from-violet-950 via-indigo-900 to-slate-950" },
-  { id: 3, title: "Motion Piece 3", aspect: "landscape", youtubeId: "FyT9WRZDLTM", loopVideo: true, description: "Energetic motion graphics with bold cuts and a punchy campaign-ready feel.", gradient: "from-zinc-950 via-neutral-900 to-stone-950" },
-  { id: 4, title: "Motion Piece 4", aspect: "landscape", youtubeId: "thBymxP71pE", loopVideo: true, description: "A sleek title-style loop focused on timing, composition, and atmosphere.", gradient: "from-teal-950 via-cyan-900 to-slate-950" },
-  { id: 5, title: "Motion Piece 5", aspect: "landscape", youtubeId: "MeyJKgAea_s", loopVideo: true, description: "A clean motion edit with smooth visual flow and brand-friendly pacing.", gradient: "from-emerald-950 via-green-900 to-slate-950" },
+  { id: 1, title: "Motion Piece 1", aspect: "landscape", youtubeId: "k58PcKYfQMg", description: "Looping motion study with crisp timing, layered transitions, and editorial rhythm.", gradient: "from-slate-900 via-zinc-900 to-neutral-950" },
+  { id: 2, title: "Motion Piece 2", aspect: "landscape", youtubeId: "D3cvdL24wy4", description: "A polished animation sequence built around movement, contrast, and visual pace.", gradient: "from-violet-950 via-indigo-900 to-slate-950" },
+  { id: 3, title: "Motion Piece 3", aspect: "landscape", youtubeId: "FyT9WRZDLTM", description: "Energetic motion graphics with bold cuts and a punchy campaign-ready feel.", gradient: "from-zinc-950 via-neutral-900 to-stone-950" },
+  { id: 4, title: "Motion Piece 4", aspect: "landscape", youtubeId: "thBymxP71pE", description: "A sleek title-style loop focused on timing, composition, and atmosphere.", gradient: "from-teal-950 via-cyan-900 to-slate-950" },
+  { id: 5, title: "Motion Piece 5", aspect: "landscape", youtubeId: "MeyJKgAea_s", description: "A clean motion edit with smooth visual flow and brand-friendly pacing.", gradient: "from-emerald-950 via-green-900 to-slate-950" },
 ];
 
 export const clients = [
