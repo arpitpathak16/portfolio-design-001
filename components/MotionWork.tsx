@@ -67,7 +67,7 @@ function MotionCard({
         transition={{ duration: 0.7, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
         onClick={() => isClickable && setModalOpen(true)}
         data-cursor-label={isClickable ? "play" : undefined}
-        className={`relative ${aspectClass} overflow-hidden group cursor-none ${className}`}
+        className={`relative ${aspectClass} overflow-hidden group ${className}`}
       >
         {/* Media — priority: YouTube thumbnail > local video > GIF > gradient */}
         <div className="absolute inset-0">
@@ -75,6 +75,7 @@ function MotionCard({
             <YouTubePreview
               videoId={item.youtubeId}
               title={item.title}
+              variant={item.isShort ? "short" : "standard"}
               className="h-full w-full object-cover transition-[filter,transform] duration-700 group-hover:scale-105 group-hover:blur-[6px]"
             />
           ) : item.videoSrc ? (
@@ -125,6 +126,7 @@ function MotionCard({
         onClose={() => setModalOpen(false)}
         title={item.title}
         client={item.client ?? ""}
+        aspect={item.aspect}
         youtubeId={item.youtubeId}
         videoSrc={item.videoSrc}
       />

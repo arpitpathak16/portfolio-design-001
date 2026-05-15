@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
-import { stats } from "@/lib/data";
 
 export default function About() {
   const ref = useRef<HTMLDivElement>(null);
@@ -43,27 +42,12 @@ export default function About() {
           ))}
         </p>
 
-        {/* Stats row */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 border-t border-[#D8D3CA] pt-10">
-          {stats.map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.6 + i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <p className="stat-num text-[#080808]">{stat.num}</p>
-              <p className="text-label text-[#888888] mt-2">{stat.label}</p>
-            </motion.div>
-          ))}
-        </div>
-
         {/* Portrait / bio row */}
         <motion.div
-          className="mt-16 md:mt-20 grid grid-cols-1 md:grid-cols-[1.08fr_0.72fr] gap-14 md:gap-20 lg:gap-28 items-center"
+          className="grid grid-cols-1 md:grid-cols-[1.08fr_0.72fr] gap-14 md:gap-20 lg:gap-28 items-center"
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.8, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ delay: 0.6, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
           {/* Bio text — left */}
           <div className="flex flex-col justify-center gap-6">

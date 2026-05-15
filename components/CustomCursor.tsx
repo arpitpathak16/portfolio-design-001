@@ -162,7 +162,7 @@ export default function CustomCursor() {
               exit={{   opacity: 0, scale: 0.5 }}
               transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
               className="relative z-10 select-none text-[8px] tracking-[0.22em] uppercase font-semibold text-[#D7D7D7]"
-              style={{ fontFamily: "var(--font-space-grotesk)" }}
+              style={{ fontFamily: "var(--font-mabry)" }}
             >
               {cfg.label}
             </motion.span>

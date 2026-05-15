@@ -58,7 +58,7 @@ export default function ProjectCard({ project, index, className = "" }: ProjectC
         initial={{ opacity: 0, y: 40 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.7, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-        className={`project-card relative overflow-hidden group cursor-none ${className}`}
+        className={`project-card relative overflow-hidden group ${className}`}
         onClick={() => isClickable && setModalOpen(true)}
         data-cursor-label={isClickable ? "play" : undefined}
       >

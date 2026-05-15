@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import MarqueeStrip from "@/components/MarqueeStrip";
 import FeaturedWork from "@/components/FeaturedWork";
 import MotionWork from "@/components/MotionWork";
+import ShortsWork from "@/components/ShortsWork";
 import DesignStrip from "@/components/DesignStrip";
 import About from "@/components/About";
 import Services from "@/components/Services";
@@ -21,10 +22,11 @@ export default function Home() {
         <FeaturedWork />
         <MarqueeStrip variant="light" />
         <MotionWork />
+        <ShortsWork />
         <DesignStrip />
         <About />
-        <Services />
         <Contact />
+        <Services />
         <Footer />
       </div>
     </main>

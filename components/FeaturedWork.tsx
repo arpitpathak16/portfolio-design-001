@@ -63,32 +63,26 @@ export default function FeaturedWork() {
 
   return (
     <section id="work" className="px-6 md:px-10 py-20 md:py-28">
-
-      <motion.p
-        className="mb-10 max-w-4xl text-heading text-[#080808] md:mb-14"
-        initial={{ opacity: 0, y: 24 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      >
-        Partnering with brands to define,
-        <br />
-        structure, and scale motion.
-      </motion.p>
-
       {/* Header */}
-      <div ref={headRef} className="mb-10 md:mb-14">
-        <div className="overflow-hidden">
+      <div ref={headRef} className="mb-10 flex flex-col justify-between gap-6 md:mb-14 md:flex-row md:items-center">
+        <div className="overflow-hidden pb-3">
           <motion.h2
-            className="font-google-sans text-display font-normal text-[#080808]"
+            className="font-google-sans text-[5rem] font-normal leading-[0.9] text-[#080808] md:text-[9rem] lg:text-[14rem]"
             initial={{ y: "100%" }}
             animate={inView ? { y: 0 } : {}}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            Creative Direction & Editing
-            <br />
-            <span className="font-semibold text-[#4A4A4A]">Work</span>
+            Work
           </motion.h2>
         </div>
+        <motion.p
+          className="text-subhead max-w-sm leading-relaxed text-[#666666] md:text-right"
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.3, duration: 0.6 }}
+        >
+          From events and campaigns to entire brand ecosystems.
+        </motion.p>
       </div>
 
       {/* ── Layered video layout ─────────────────────────────────── */}

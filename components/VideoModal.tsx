@@ -8,13 +8,14 @@ interface VideoModalProps {
   onClose: () => void;
   title: string;
   client: string;
+  aspect?: "landscape" | "portrait" | "square";
   // Pass one of these:
   youtubeId?: string;
   videoSrc?: string;
 }
 
 export default function VideoModal({
-  isOpen, onClose, title, client, youtubeId, videoSrc,
+  isOpen, onClose, title, client, aspect = "landscape", youtubeId, videoSrc,
 }: VideoModalProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -39,6 +40,10 @@ export default function VideoModal({
   const embedSrc = youtubeId
     ? `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1&color=white`
     : null;
+  const aspectClass =
+    aspect === "portrait" ? "aspect-[9/16] max-h-[78vh] max-w-[min(100%,28rem)] mx-auto"
+    : aspect === "square" ? "aspect-square max-h-[78vh] max-w-[min(100%,42rem)] mx-auto"
+    : "aspect-video";
 
   return (
     <AnimatePresence>
@@ -83,9 +88,7 @@ export default function VideoModal({
               </button>
             </div>
 
-            {/* Video container — 16:9 */}
-            <div className="relative w-full overflow-hidden bg-[#101010]"
-                 style={{ paddingBottom: "56.25%" }}>
+            <div className={`relative w-full overflow-hidden bg-[#101010] ${aspectClass}`}>
               {embedSrc ? (
                 <iframe
                   src={embedSrc}

@@ -2,14 +2,19 @@ interface YouTubePreviewProps {
   videoId: string;
   title: string;
   className?: string;
+  variant?: "standard" | "short";
 }
 
 export default function YouTubePreview({
   videoId,
   title,
   className = "",
+  variant = "standard",
 }: YouTubePreviewProps) {
-  const thumbnail = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  const thumbnail =
+    variant === "short"
+      ? `https://i.ytimg.com/vi/${videoId}/frame0.jpg`
+      : `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
 
   return (
     <>

@@ -1,14 +1,6 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: "Google Sans Flex";
-  src: url("/fonts/GoogleSansFlex-Variable.ttf") format("truetype");
-  font-weight: 100 1000;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
   font-family: "Mabry Pro";
   src: url("/fonts/MabryPro-Regular.ttf") format("truetype");
   font-weight: 300 700;
@@ -29,10 +21,11 @@
   --color-violet:     #9E9EFF;
 
   /* ── Fonts ── */
-  --font-google-sans: "Google Sans Flex", var(--font-space-grotesk);
-  --font-display: "Mabry Pro", var(--font-space-grotesk);
-  --font-body:    "Mabry Pro", var(--font-dm-sans);
-  --font-serif:   var(--font-dm-serif);
+  --font-mabry: "Mabry Pro", Arial, sans-serif;
+  --font-google-sans: var(--font-mabry);
+  --font-display: var(--font-mabry);
+  --font-body: var(--font-mabry);
+  --font-serif: var(--font-mabry);
 
   /* ── Easing ── */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -51,15 +44,8 @@ html {
 body {
   background-color: var(--color-warm-white);
   color: var(--color-ink);
-  font-family: var(--font-body), system-ui, sans-serif;
-  cursor: none;
+  font-family: var(--font-mabry);
   overflow-x: hidden;
-}
-
-/* Show default cursor on touch / mobile devices */
-@media (hover: none) {
-  body { cursor: auto; }
-  .custom-cursor { display: none !important; }
 }
 
 /* ── Selection ── */
@@ -120,7 +106,7 @@ body {
 }
 
 .font-google-sans {
-  font-family: var(--font-google-sans), sans-serif;
+  font-family: var(--font-google-sans);
 }
 
 /* ── Marquee animation ── */
@@ -203,6 +189,6 @@ body {
   font-size: clamp(2.5rem, 5vw, 5rem);
   line-height: 1;
   letter-spacing: -0.04em;
-  font-family: var(--font-space-grotesk), sans-serif;
+  font-family: var(--font-mabry);
   font-weight: 700;
 }

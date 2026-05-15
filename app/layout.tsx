@@ -1,29 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, DM_Sans, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
-import CustomCursor from "@/components/CustomCursor";
-
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  display: "swap",
-});
-
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  display: "swap",
-});
-
-const dmSerif = DM_Serif_Display({
-  variable: "--font-dm-serif",
-  subsets: ["latin"],
-  weight: ["400"],
-  style: ["normal", "italic"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Apoorva Anand — Creative Producer",
@@ -41,12 +17,8 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      className={`${spaceGrotesk.variable} ${dmSans.variable} ${dmSerif.variable} antialiased`}
-    >
+    <html lang="en" className="antialiased">
       <body className="grain">
-        <CustomCursor />
         {children}
       </body>
     </html>
