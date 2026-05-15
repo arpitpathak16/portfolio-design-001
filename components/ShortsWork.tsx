@@ -22,7 +22,7 @@ function ShortCard({ item, index }: { item: MotionItem; index: number }) {
         transition={{ duration: 0.6, delay: index * 0.04, ease: [0.16, 1, 0.3, 1] }}
         onClick={() => setModalOpen(true)}
         data-cursor-label="play"
-        className="group relative aspect-[9/16] w-[72vw] shrink-0 overflow-hidden bg-[#101010] text-left sm:w-[18rem] md:w-auto"
+        className="group relative aspect-[9/16] w-full overflow-hidden bg-[#101010] text-left"
         aria-label={`Play ${item.title}`}
       >
         <div className="absolute inset-0">
@@ -44,10 +44,10 @@ function ShortCard({ item, index }: { item: MotionItem; index: number }) {
           <p className="text-label mb-2 text-[#D7D7D7]">
             {item.client}{item.client && item.year ? " - " : ""}{item.year}
           </p>
-          <h3 className="font-display text-lg font-semibold leading-tight text-[#F5F0E8] md:text-xl">
+          <h3 className="font-display text-sm font-semibold leading-tight text-[#F5F0E8] sm:text-base md:text-xl">
             {item.title}
           </h3>
-          <p className="mt-3 line-clamp-3 text-xs leading-snug text-[#D7D7D7]/78 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <p className="mt-3 hidden line-clamp-3 text-xs leading-snug text-[#D7D7D7]/78 opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:block">
             {item.description}
           </p>
         </div>
@@ -70,8 +70,8 @@ export default function ShortsWork() {
   const inView = useInView(headRef, { once: true, margin: "-10%" });
 
   return (
-    <section className="border-t border-[#D8D3CA] px-6 py-20 md:px-10 md:py-28">
-      <div ref={headRef} className="mb-10 flex flex-col justify-between gap-4 md:mb-14 md:flex-row md:items-end">
+    <section className="border-t border-[#D8D3CA] px-5 py-16 md:px-10 md:py-28">
+      <div ref={headRef} className="mb-8 flex flex-col justify-between gap-4 md:mb-14 md:flex-row md:items-end">
         <div className="overflow-hidden pb-3">
           <motion.h2
             className="font-google-sans text-display font-normal leading-[1.03] text-[#080808]"
@@ -95,13 +95,13 @@ export default function ShortsWork() {
       </div>
 
       <div className="mb-4 grid grid-cols-2 gap-3 border-y border-[#D8D3CA] py-3 md:flex md:items-center md:justify-between">
-        <p className="text-label text-[#888888]">YouTube Shorts Playlist</p>
-        <p className="text-label text-[#888888]">{shortsItems.length} Vertical Cuts</p>
+        <p className="text-label text-[#888888]">Short-Form Portfolio</p>
+        <p className="text-label text-right text-[#888888] md:text-left">Vertical Campaign Edits</p>
       </div>
 
-      <div className="-mx-6 flex snap-x gap-4 overflow-x-auto px-6 pb-4 md:mx-0 md:grid md:grid-cols-4 md:gap-5 md:overflow-visible md:px-0">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4 md:gap-5">
         {shortsItems.map((item, index) => (
-          <div key={item.id} className="snap-start md:min-w-0">
+          <div key={item.id} className="min-w-0">
             <ShortCard item={item} index={index} />
           </div>
         ))}
