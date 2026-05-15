@@ -24,7 +24,7 @@ export default function Navigation() {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-        className="fixed top-0 left-0 right-0 z-10 px-6 md:px-10 py-6 flex items-start justify-end"
+        className={`fixed top-0 left-0 right-0 px-6 md:px-10 py-6 flex items-start justify-end ${menuOpen ? "z-[1000]" : "z-10"}`}
       >
         {/* Desktop links */}
         <nav className="hidden md:flex overflow-hidden rounded-md border border-[#D8D3CA] bg-[#F8F8F8] shadow-[0_0_0_1px_rgba(0,0,0,0.04)]">
@@ -61,6 +61,14 @@ export default function Navigation() {
             transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
             className="fixed inset-0 z-[999] bg-[#F5F0E8] flex flex-col justify-center px-8"
           >
+            <button
+              type="button"
+              onClick={() => setMenuOpen(false)}
+              className="absolute left-8 top-8 rounded-md border border-[#D8D3CA] bg-[#F8F8F8] px-4 py-3 text-label text-[#080808] transition-colors duration-300 hover:bg-[#EFEFEF]"
+              aria-label="Close menu"
+            >
+              Close
+            </button>
             <nav className="flex flex-col gap-6">
               {navLinks.map((link, i) => (
                 <motion.a
