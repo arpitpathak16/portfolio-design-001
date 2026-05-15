@@ -53,7 +53,7 @@ export default function About() {
           <div className="flex flex-col justify-center gap-6">
             <div className="w-fit">
               <p className="text-display text-[#080808] font-bold leading-none">Apoorva Anand</p>
-              <p className="font-serif text-2xl text-[#888888] italic mt-2 text-left md:text-right">Creative Producer</p>
+              <p className="font-serif text-2xl text-[#888888] mt-2 text-left md:text-right">Creative Producer</p>
             </div>
             <p className="text-subhead text-[#333333] leading-relaxed">
               Based in Pune, India — working at the intersection of video editing, motion design,

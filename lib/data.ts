@@ -206,7 +206,7 @@ export interface MotionItem {
 export const motionItems: MotionItem[] = [
   {
     id: 1,
-    title: "Motion Piece 1",
+    title: "Stanplus",
     aspect: "landscape",
     youtubeId: "k58PcKYfQMg",
     description: "Looping motion study with crisp timing, layered transitions, and editorial rhythm.",
@@ -214,7 +214,7 @@ export const motionItems: MotionItem[] = [
   },
   {
     id: 2,
-    title: "Motion Piece 2",
+    title: "Alembic Case Study",
     aspect: "landscape",
     youtubeId: "D3cvdL24wy4",
     description: "A polished animation sequence built around movement, contrast, and visual pace.",
@@ -222,7 +222,7 @@ export const motionItems: MotionItem[] = [
   },
   {
     id: 3,
-    title: "Motion Piece 3",
+    title: "Rocks - Educational Video",
     aspect: "landscape",
     youtubeId: "FyT9WRZDLTM",
     description: "Energetic motion graphics with bold cuts and a punchy campaign-ready feel.",
@@ -230,7 +230,7 @@ export const motionItems: MotionItem[] = [
   },
   {
     id: 4,
-    title: "Motion Piece 4",
+    title: "THIP Academy",
     aspect: "landscape",
     youtubeId: "thBymxP71pE",
     description: "A sleek title-style loop focused on timing, composition, and atmosphere.",
@@ -238,7 +238,7 @@ export const motionItems: MotionItem[] = [
   },
   {
     id: 5,
-    title: "Motion Piece 5",
+    title: "Resiliency Program",
     aspect: "landscape",
     youtubeId: "MeyJKgAea_s",
     description: "A clean motion edit with smooth visual flow and brand-friendly pacing.",
