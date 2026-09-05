@@ -11,13 +11,14 @@ type WorkLayer =
   | { type: "wide"; project: Project }
   | { type: "trio"; left?: Project; leftShape: "portrait" | "landscape"; middle?: Project; right?: Project; rightShape: "portrait" | "landscape" };
 
-export default function FeaturedWork() {
+export default function FeaturedWork({ extraProjects = [] }: { extraProjects?: Project[] }) {
   const headRef = useRef<HTMLDivElement>(null);
   const inView  = useInView(headRef, { once: true, margin: "-10%" });
 
   const layout = useMemo<WorkLayer[]>(() => {
-    const wides = [...projects.filter((project) => project.youtubeId)];
-    const verticals = [...projects.filter((project) => project.videoSrc)];
+    const allProjects = [...projects, ...extraProjects];
+    const wides = [...allProjects.filter((project) => project.youtubeId)];
+    const verticals = [...allProjects.filter((project) => project.videoSrc)];
     const layers: WorkLayer[] = [];
     const takePortraitOrLandscape = () => {
       const portrait = verticals.shift();
@@ -57,7 +58,7 @@ export default function FeaturedWork() {
     }
 
     return layers;
-  }, []);
+  }, [extraProjects]);
 
   let cardIndex = 0;
 

@@ -9,8 +9,18 @@ import About from "@/components/About";
 import Services from "@/components/Services";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import { getExtra } from "@/lib/store";
+import type { Project, MotionItem } from "@/lib/data";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const [extraProjects, extraMotionItems, extraShortsItems] = await Promise.all([
+    getExtra<Project>("projects"),
+    getExtra<MotionItem>("motionItems"),
+    getExtra<MotionItem>("shortsItems"),
+  ]);
+
   return (
     <main className="relative min-h-screen bg-[#F5F0E8]">
       <div className="fixed inset-0 z-0">
@@ -19,10 +29,10 @@ export default function Home() {
       <Navigation />
       <div className="h-screen pointer-events-none" aria-hidden="true" />
       <div className="relative z-20 bg-[#F5F0E8]">
-        <FeaturedWork />
+        <FeaturedWork extraProjects={extraProjects} />
         <MarqueeStrip variant="light" />
-        <MotionWork />
-        <ShortsWork />
+        <ShortsWork extraItems={extraShortsItems} />
+        <MotionWork extraItems={extraMotionItems} />
         <DesignStrip />
         <About />
         <Contact />

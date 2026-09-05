@@ -134,11 +134,11 @@ function MotionCard({
   );
 }
 
-export default function MotionWork() {
+export default function MotionWork({ extraItems = [] }: { extraItems?: MotionItem[] }) {
   const headRef = useRef<HTMLDivElement>(null);
   const inView  = useInView(headRef, { once: true, margin: "-10%" });
 
-  const landscapes = motionItems.filter(i => i.aspect === "landscape");
+  const landscapes = [...motionItems, ...extraItems].filter(i => i.aspect === "landscape");
   const leadItems = landscapes.filter((_, index) => index % 3 === 0);
   const pairItems = landscapes.filter((_, index) => index % 3 !== 0);
 

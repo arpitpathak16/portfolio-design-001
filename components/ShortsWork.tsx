@@ -65,9 +65,10 @@ function ShortCard({ item, index }: { item: MotionItem; index: number }) {
   );
 }
 
-export default function ShortsWork() {
+export default function ShortsWork({ extraItems = [] }: { extraItems?: MotionItem[] }) {
   const headRef = useRef<HTMLDivElement>(null);
   const inView = useInView(headRef, { once: true, margin: "-10%" });
+  const allItems = [...shortsItems, ...extraItems];
 
   return (
     <section className="border-t border-[#D8D3CA] px-5 py-16 md:px-10 md:py-28">
@@ -100,7 +101,7 @@ export default function ShortsWork() {
       </div>
 
       <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4 md:gap-5">
-        {shortsItems.map((item, index) => (
+        {allItems.map((item, index) => (
           <div key={item.id} className="min-w-0">
             <ShortCard item={item} index={index} />
           </div>
